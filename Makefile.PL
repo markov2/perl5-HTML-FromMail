@@ -6,8 +6,8 @@ use IO::Handle;
 
 my @optional =
 (
-  [ Text::MagicTemplate => '3.12', reason => <<'REASON' ]
-Required if you want to use the Text::MagicTemplate formatter, which is
+  [ Template::Magic => '1.02', reason => <<'REASON' ]
+Required if you want to use the Template::Magic formatter, which is
 not required to run the examples.
 REASON
 
@@ -32,32 +32,6 @@ my $has_readkey;
 BEGIN
 {   eval "require Term::ReadKey";
     $has_readkey = not length $@;
-}
-
-sub ask($$)
-{   my ($text, $default) = @_;
-    print "---> $text [$default] ";
-    my $key;
-
-    if(! -t STDIN) { $key = $default }
-    elsif($has_readkey)
-    {   Term::ReadKey->import;
-        ReadMode(3);   # cbreak mode
-        $key = ReadKey(0) until defined($key);
-        ReadMode(1);
-
-        $key = $default if $key =~ m/\n/;
-        print "$key\n";
-    }
-    else
-    {   # No Term::ReadKey
-        flush STDOUT;
-        my $line = <STDIN>;
-        $line    =~ m/(\S)/;
-        $key     = $1 || $default;
-    }
-
-    $key;
 }
 
 my $default_install_answer = $ENV{INSTALL_HTMLFROMMAIL_OPTIONALS}
@@ -144,7 +118,7 @@ foreach my $optional (@optional)
     }
     
     my $install  = $default_install_answer;
-    my $key = ask "Do you want to install $module? yes/no/all", $install;
+    my $key = prompt "Do you want to install $module? yes/no/all", $install;
 
     if($key eq 'a')
     {   $default_install_answer = 'a';
@@ -162,8 +136,8 @@ foreach my $optional (@optional)
     print "     Added $distr version $version to the requirements\n";
 }
 
-$prereq{'Bundle::Text::MagicTemplate'} = '3.12'
-   if exists $prereq{'Text::MagicTemplate'};
+$prereq{'Bundle::Template::Magic'} = '0'
+   if exists $prereq{'Template::Magic'};
 
 print <<'DONE';
 

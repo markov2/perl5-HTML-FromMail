@@ -1,3 +1,11 @@
 
-version 0.01:
+version 0.11:
+
+	- Use ExtUtils::MakeMaker::prompt() instead of own ask() in
+	  Makefile.PL.  Required for CPANPLUS.
+
+version 0.10: Wed Jan 21 09:56:09 CET 2004
+	- Text::MagicTemplate has been renamed to Template::Magic
+
+version 0.01: Nov 3, 2003
 	- Initial coding

@@ -8,22 +8,20 @@ use base 'HTML::FromMail::Format';
 use Carp;
 
 BEGIN
-{   eval { require Text::MagicTemplate };
-    die "Install Bundle::Text::MagicTemplate for this formatter\n"
+{   eval { require Template::Magic };
+    die "Install Bundle::Template::Magic for this formatter\n"
        if $@;
-
-    Text::MagicTemplate->VERSION('3.05');
 }
 
 =chapter NAME
 
-HTML::FromMail::Format::Magic - convert messages into HTML using Text::MagicTemplate
+HTML::FromMail::Format::Magic - convert messages into HTML using Template::Magic
 
 =chapter SYNOPSIS
 
 =chapter DESCRIPTION
 
-Convert messages into HTML using L<Text::MagicTemplate>.  This is a simple
+Convert messages into HTML using L<Template::Magic>.  This is a simple
 template system, which focusses on giving produced pieces of HTML a place
 in larger HTML structures.
 
@@ -45,7 +43,7 @@ sub export($@)
 {   my ($self, %args) = @_;
 
     my $magic = $self->{HFFM_magic}
-      = Text::MagicTemplate->new
+      = Template::Magic->new
          ( markers       => 'HTML'
          , zone_handlers => sub { $self->lookupTemplate(\%args, @_) }
          );
@@ -63,7 +61,7 @@ sub export($@)
 
 
 =method magic
-Returns the L<Text::MagicTemplate> object which is used.
+Returns the L<Template::Magic> object which is used.
  
 =cut
 
@@ -72,7 +70,7 @@ sub magic() { shift->{HFFM_magic} }
 =method lookupTemplate ARGS, ZONE
 Kind of autoloader, used to discover the correct method to be invoked
 when a pattern must be filled-in.
-ZONE is the found L<Ttxt::MagicTemplate::Zone> information.
+ZONE is the found L<Template::Magic::Zone> information.
 
 =cut
 

@@ -25,8 +25,8 @@ my $verbose = @ARGV && $ARGV[0] eq '-v' ? shift @ARGV : 0;
 usage unless @ARGV;
 
 #my $template_system;     # use default = OODoc
-my $template_system  = 'HTML::FromMail::Format::Magic';
-#my $template_system = 'HTML::FromMail::Format::OODoc';
+#my $template_system  = 'HTML::FromMail::Format::Magic';
+my $template_system = 'HTML::FromMail::Format::OODoc';
 
 # Relative directory with template files.  The template used is
 # examples/magic1/message/index.html
