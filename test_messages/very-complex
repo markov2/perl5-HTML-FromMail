@@ -1,0 +1,396 @@
+From me 2002
+Return-Path: <agaponrmthis@optonline.net>
+Delivered-To: markov@speeltuin.atcomputing.nl
+Received: from mta9.srv.hcvlny.cv.net (mta9.srv.hcvlny.cv.net [167.206.5.42])
+	by speeltuin.ATComputing.nl (Postfix) with ESMTP id E364639B6
+	for <Mark@Overmeer.net>; Sat,  2 Aug 2003 03:08:41 +0200 (CEST)
+Received: from asv11.srv.hcvlny.cv.net
+ (asv11.srv.hcvlny.cv.net [167.206.5.145]) by mta9.srv.hcvlny.cv.net
+ (iPlanet Messaging Server 5.2 HotFix 1.16 (built May 14 2003))
+ with ESMTP id <0HIY009FKWOB95@mta9.srv.hcvlny.cv.net> for Mark@Overmeer.net;
+ Fri, 01 Aug 2003 21:12:11 -0400 (EDT)
+Received: from edge.foundation.invalid
+ (ool-4355489e.dyn.optonline.net [67.85.72.158])	by asv11.srv.hcvlny.cv.net
+ (8.12.9/8.12.9) with ESMTP id h721BXJd024727; Fri,
+ 01 Aug 2003 21:11:33 -0400 (EDT)
+Received: from optonline.net (localhost.foundation.invalid [127.0.0.1])
+	by edge.foundation.invalid (8.12.8p1/8.12.6) with ESMTP id h721CAR2005517;
+ Fri, 01 Aug 2003 21:12:10 -0400
+Date: Fri, 01 Aug 2003 21:12:10 -0400
+From: Andriy Gapon <agaponrmthis@optonline.net>
+Subject: Re: Mail::Message->forward() vs forward-as-attachment
+To: Mark Overmeer <Mark@Overmeer.net>
+Cc: Mail-Box Mailinglist <mailbox@speeltuin.ATComputing.nl>
+Message-id: <3F2B0FEA.5020706@optonline.net>
+Organization: none
+MIME-version: 1.0
+Content-type: multipart/mixed; boundary="Boundary_(ID_HpMGlUgbw8V8lPAgHS5chQ)"
+X-Accept-Language: en, uk, ru
+User-Agent: Mozilla/5.0 (X11; U; FreeBSD i386; en-US; rv:1.4) Gecko/20030701
+Status: RO
+Content-Length: 15833
+Lines: 362
+
+This is a multi-part message in MIME format.
+
+--Boundary_(ID_HpMGlUgbw8V8lPAgHS5chQ)
+Content-type: text/plain; charset=us-ascii; format=flowed
+Content-transfer-encoding: 7BIT
+
+
+Mark,
+
+sorry for the delay.
+Attached are an original e-mail with an attachment, an email derived from it 
+by Forward As->Attachment in mozilla and an equivalent in pine.
+Incidentally, this email is created by forwarding all of them as attachments 
+in mozilla.
+Hope this will be useful.
+
+P.S. it seems that my ISP's mail server re-generates all Boundary values to 
+its own liking.
+
+-- 
+Andriy Gapon
+
+--Boundary_(ID_HpMGlUgbw8V8lPAgHS5chQ)
+Content-type: message/rfc822; name="test 1"
+
+Return-path: <agapon@cv-nj.com>
+Received: from terminus.foundation.invalid
+ (localhost.foundation.invalid [127.0.0.1])	by terminus.foundation.invalid
+ (8.12.6p2/8.12.3) with ESMTP id h720kKPg083017	for
+ <avg@terminus.foundation.invalid>; Fri,
+ 01 Aug 2003 20:46:20 -0400 (EDT envelope-from agapon@cv-nj.com)
+Received: (from avg@localhost)	by terminus.foundation.invalid
+ (8.12.6p2/8.12.6/Submit) id h720kKsu083016	for avg; Fri,
+ 01 Aug 2003 20:46:20 -0400 (EDT)
+Received: from s1.optonline.net [167.206.112.6]	by localhost with POP3
+ (fetchmail-6.2.2)	for avg@localhost (single-drop); Fri,
+ 01 Aug 2003 20:46:20 -0400 (EDT)
+Received: from mta5.srv.hcvlny.cv.net (mta5.srv.hcvlny.cv.net [167.206.5.31])
+ by mstr8.srv.hcvlny.cv.net
+ (iPlanet Messaging Server 5.2 HotFix 1.16 (built May 14 2003))
+ with ESMTP id <0HIY003KEVGNE9@mstr8.srv.hcvlny.cv.net> for
+ agapon@optonline.net; Fri, 01 Aug 2003 20:45:59 -0400 (EDT)
+Received: from asv8.srv.hcvlny.cv.net (asv8.srv.hcvlny.cv.net [167.206.5.47])
+ by mta5.srv.hcvlny.cv.net
+ (iPlanet Messaging Server 5.2 HotFix 1.16 (built May 14 2003))
+ with ESMTP id <0HIY007OQVGR7R@mta5.srv.hcvlny.cv.net> for agapon@optonline.net
+ (ORCPT agapon@optonline.net); Fri, 01 Aug 2003 20:46:04 -0400 (EDT)
+Received: from edge.foundation.invalid
+ (ool-4355489e.dyn.optonline.net [67.85.72.158])	by asv8.srv.hcvlny.cv.net
+ (8.12.9/8.12.9) with ESMTP id h720jQgH019233	for <agapon@optonline.net>; Fri,
+ 01 Aug 2003 20:45:27 -0400 (EDT)
+Received: from cv-nj.com (localhost.foundation.invalid [127.0.0.1])
+	by edge.foundation.invalid (8.12.8p1/8.12.6) with ESMTP id h720jxR2005483	for
+ <agapon@optonline.net>; Fri,
+ 01 Aug 2003 20:46:00 -0400 (EDT envelope-from agapon@cv-nj.com)
+Date: Fri, 01 Aug 2003 20:45:59 -0400
+From: Andriy Gapon <agapon@cv-nj.com>
+Subject: test 1
+To: agapon@optonline.net
+Message-id: <3F2B09C7.8070007@cv-nj.com>
+MIME-version: 1.0
+Content-type: multipart/mixed; boundary="Boundary_(ID_bftQKKXd1/64dlGoqgHouA)"
+X-Accept-Language: en, uk, ru
+User-Agent: Mozilla/5.0 (X11; U; FreeBSD i386; en-US; rv:1.4) Gecko/20030701
+X-Authentication-warning: terminus.foundation.invalid: avg set sender to
+ agapon@cv-nj.com using -f
+Original-recipient: rfc822;agapon@optonline.net
+
+This is a multi-part message in MIME format.
+
+--Boundary_(ID_bftQKKXd1/64dlGoqgHouA)
+Content-type: text/plain; charset=us-ascii; format=flowed
+Content-transfer-encoding: 7BIT
+
+
+This is test 1 message.
+
+--Boundary_(ID_bftQKKXd1/64dlGoqgHouA)
+Content-type: text/plain; name=cats.sig
+Content-transfer-encoding: 7BIT
+Content-disposition: inline; filename=cats.sig
+
+Andriy Gapon
+*
+"...the last thing we need is a new production strategy for cats." 
+Wayne Pacelle, senior vice president, The Humane Society of the United States
+
+--Boundary_(ID_bftQKKXd1/64dlGoqgHouA)--
+
+--Boundary_(ID_HpMGlUgbw8V8lPAgHS5chQ)
+Content-type: message/rfc822; name="[Fwd: test 1]"
+
+Return-path: <agapon@optonline.net>
+Received: from terminus.foundation.invalid
+ (localhost.foundation.invalid [127.0.0.1])	by terminus.foundation.invalid
+ (8.12.6p2/8.12.3) with ESMTP id h7210dPg083417	for
+ <avg@terminus.foundation.invalid>; Fri,
+ 01 Aug 2003 21:00:39 -0400 (EDT envelope-from agapon@optonline.net)
+Received: (from avg@localhost)	by terminus.foundation.invalid
+ (8.12.6p2/8.12.6/Submit) id h7210d0N083416	for avg; Fri,
+ 01 Aug 2003 21:00:39 -0400 (EDT)
+Received: from s1.optonline.net [167.206.112.6]	by localhost with POP3
+ (fetchmail-6.2.2)	for avg@localhost (single-drop); Fri,
+ 01 Aug 2003 21:00:39 -0400 (EDT)
+Received: from mta6.srv.hcvlny.cv.net (mta6.srv.hcvlny.cv.net [167.206.5.17])
+ by mstr8.srv.hcvlny.cv.net
+ (iPlanet Messaging Server 5.2 HotFix 1.16 (built May 14 2003))
+ with ESMTP id <0HIY003B7VJPGO@mstr8.srv.hcvlny.cv.net> for
+ agapon@optonline.net; Fri, 01 Aug 2003 20:47:49 -0400 (EDT)
+Received: from asv20.srv.hcvlny.cv.net
+ (asv20.srv.hcvlny.cv.net [167.206.5.174]) by mta6.srv.hcvlny.cv.net
+ (iPlanet Messaging Server 5.2 HotFix 1.16 (built May 14 2003))
+ with ESMTP id <0HIY00BLZVJX4Z@mta6.srv.hcvlny.cv.net> for agapon@optonline.net
+ (ORCPT agapon@cv-nj.com); Fri, 01 Aug 2003 20:47:58 -0400 (EDT)
+Received: from zeus.cv-nj.com ([208.216.124.246])	by asv20.srv.hcvlny.cv.net
+ (8.12.9/8.12.9) with ESMTP id h720jsBQ006236	for <agapon@optonline.net>; Fri,
+ 01 Aug 2003 20:45:55 -0400 (EDT)
+Received: from mta5.srv.hcvlny.cv.net (mta5.srv.hcvlny.cv.net [167.206.5.31])
+	by zeus.cv-nj.com (8.11.0/8.11.0) with ESMTP id h71N7AP14575	for
+ <agapon@cv-nj.com>; Fri, 01 Aug 2003 19:07:10 -0400
+Received: from asv20.srv.hcvlny.cv.net
+ (asv20.srv.hcvlny.cv.net [167.206.5.174]) by mta5.srv.hcvlny.cv.net
+ (iPlanet Messaging Server 5.2 HotFix 1.16 (built May 14 2003))
+ with ESMTP id <0HIY007F2VJNG6@mta5.srv.hcvlny.cv.net> for agapon@cv-nj.com;
+ Fri, 01 Aug 2003 20:47:47 -0400 (EDT)
+Received: from edge.foundation.invalid
+ (ool-4355489e.dyn.optonline.net [67.85.72.158])	by asv20.srv.hcvlny.cv.net
+ (8.12.9/8.12.9) with ESMTP id h720jnBQ006181	for <agapon@cv-nj.com>; Fri,
+ 01 Aug 2003 20:45:49 -0400 (EDT)
+Received: from optonline.net (localhost.foundation.invalid [127.0.0.1])
+	by edge.foundation.invalid (8.12.8p1/8.12.6) with ESMTP id h720liR2005494	for
+ <agapon@cv-nj.com>; Fri,
+ 01 Aug 2003 20:47:44 -0400 (EDT envelope-from agapon@optonline.net)
+Date: Fri, 01 Aug 2003 20:47:44 -0400
+From: Andriy Gapon <agapon@optonline.net>
+Subject: [Fwd: test 1]
+To: agapon@cv-nj.com
+Message-id: <3F2B0A30.5000102@optonline.net>
+MIME-version: 1.0
+Content-type: multipart/mixed; boundary="Boundary_(ID_AIHMuNpsDNiHCN62/68Vmg)"
+X-Accept-Language: en, uk, ru
+User-Agent: Mozilla/5.0 (X11; U; FreeBSD i386; en-US; rv:1.4) Gecko/20030701
+X-Authentication-warning: terminus.foundation.invalid: avg set sender to
+ agapon@optonline.net using -f
+Original-recipient: rfc822;agapon@cv-nj.com
+
+This is a multi-part message in MIME format.
+
+--Boundary_(ID_AIHMuNpsDNiHCN62/68Vmg)
+Content-type: text/plain; charset=us-ascii; format=flowed
+Content-transfer-encoding: 7BIT
+
+
+-- 
+Andriy Gapon
+
+--Boundary_(ID_AIHMuNpsDNiHCN62/68Vmg)
+Content-type: message/rfc822; name="test 1"
+
+Return-path: <agapon@cv-nj.com>
+Received: from terminus.foundation.invalid
+ (localhost.foundation.invalid [127.0.0.1])	by terminus.foundation.invalid
+ (8.12.6p2/8.12.3) with ESMTP id h720kKPg083017	for
+ <avg@terminus.foundation.invalid>; Fri,
+ 01 Aug 2003 20:46:20 -0400 (EDT envelope-from agapon@cv-nj.com)
+Received: (from avg@localhost)	by terminus.foundation.invalid
+ (8.12.6p2/8.12.6/Submit) id h720kKsu083016	for avg; Fri,
+ 01 Aug 2003 20:46:20 -0400 (EDT)
+Received: from s1.optonline.net [167.206.112.6]	by localhost with POP3
+ (fetchmail-6.2.2)	for avg@localhost (single-drop); Fri,
+ 01 Aug 2003 20:46:20 -0400 (EDT)
+Received: from mta5.srv.hcvlny.cv.net (mta5.srv.hcvlny.cv.net [167.206.5.31])
+ by mstr8.srv.hcvlny.cv.net
+ (iPlanet Messaging Server 5.2 HotFix 1.16 (built May 14 2003))
+ with ESMTP id <0HIY003KEVGNE9@mstr8.srv.hcvlny.cv.net> for
+ agapon@optonline.net; Fri, 01 Aug 2003 20:45:59 -0400 (EDT)
+Received: from asv8.srv.hcvlny.cv.net (asv8.srv.hcvlny.cv.net [167.206.5.47])
+ by mta5.srv.hcvlny.cv.net
+ (iPlanet Messaging Server 5.2 HotFix 1.16 (built May 14 2003))
+ with ESMTP id <0HIY007OQVGR7R@mta5.srv.hcvlny.cv.net> for agapon@optonline.net
+ (ORCPT agapon@optonline.net); Fri, 01 Aug 2003 20:46:04 -0400 (EDT)
+Received: from edge.foundation.invalid
+ (ool-4355489e.dyn.optonline.net [67.85.72.158])	by asv8.srv.hcvlny.cv.net
+ (8.12.9/8.12.9) with ESMTP id h720jQgH019233	for <agapon@optonline.net>; Fri,
+ 01 Aug 2003 20:45:27 -0400 (EDT)
+Received: from cv-nj.com (localhost.foundation.invalid [127.0.0.1])
+	by edge.foundation.invalid (8.12.8p1/8.12.6) with ESMTP id h720jxR2005483	for
+ <agapon@optonline.net>; Fri,
+ 01 Aug 2003 20:46:00 -0400 (EDT envelope-from agapon@cv-nj.com)
+Date: Fri, 01 Aug 2003 20:45:59 -0400
+From: Andriy Gapon <agapon@cv-nj.com>
+Subject: test 1
+To: agapon@optonline.net
+Message-id: <3F2B09C7.8070007@cv-nj.com>
+MIME-version: 1.0
+Content-type: multipart/mixed; boundary="Boundary_(ID_5ThAa143qoFgxo2UZ/JNJQ)"
+X-Accept-Language: en, uk, ru
+User-Agent: Mozilla/5.0 (X11; U; FreeBSD i386; en-US; rv:1.4) Gecko/20030701
+X-Authentication-warning: terminus.foundation.invalid: avg set sender to
+ agapon@cv-nj.com using -f
+Original-recipient: rfc822;agapon@optonline.net
+
+This is a multi-part message in MIME format.
+
+--Boundary_(ID_5ThAa143qoFgxo2UZ/JNJQ)
+Content-type: text/plain; charset=us-ascii; format=flowed
+Content-transfer-encoding: 7BIT
+
+
+This is test 1 message.
+
+--Boundary_(ID_5ThAa143qoFgxo2UZ/JNJQ)
+Content-type: text/plain; name=cats.sig
+Content-transfer-encoding: 7BIT
+Content-disposition: inline; filename=cats.sig
+
+Andriy Gapon
+*
+"...the last thing we need is a new production strategy for cats." 
+Wayne Pacelle, senior vice president, The Humane Society of the United States
+
+--Boundary_(ID_5ThAa143qoFgxo2UZ/JNJQ)--
+
+--Boundary_(ID_AIHMuNpsDNiHCN62/68Vmg)--
+
+--Boundary_(ID_HpMGlUgbw8V8lPAgHS5chQ)
+Content-type: message/rfc822; name="test 1 (fwd)"
+
+Return-path: <agapon@cv-nj.com>
+Received: from terminus.foundation.invalid
+ (localhost.foundation.invalid [127.0.0.1])	by terminus.foundation.invalid
+ (8.12.6p2/8.12.3) with ESMTP id h7210fPg083422	for
+ <avg@terminus.foundation.invalid>; Fri,
+ 01 Aug 2003 21:00:41 -0400 (EDT envelope-from agapon@cv-nj.com)
+Received: (from avg@localhost)	by terminus.foundation.invalid
+ (8.12.6p2/8.12.6/Submit) id h7210eBD083420	for avg; Fri,
+ 01 Aug 2003 21:00:40 -0400 (EDT)
+Received: from s1.optonline.net [167.206.112.6]	by localhost with POP3
+ (fetchmail-6.2.2)	for avg@localhost (single-drop); Fri,
+ 01 Aug 2003 21:00:40 -0400 (EDT)
+Received: from mta6.srv.hcvlny.cv.net (mta6.srv.hcvlny.cv.net [167.206.5.17])
+ by mstr8.srv.hcvlny.cv.net
+ (iPlanet Messaging Server 5.2 HotFix 1.16 (built May 14 2003))
+ with ESMTP id <0HIY003OKVMTH8@mstr8.srv.hcvlny.cv.net> for
+ agapon@optonline.net; Fri, 01 Aug 2003 20:49:41 -0400 (EDT)
+Received: from asv7.srv.hcvlny.cv.net (asv7.srv.hcvlny.cv.net [167.206.5.43])
+ by mta6.srv.hcvlny.cv.net
+ (iPlanet Messaging Server 5.2 HotFix 1.16 (built May 14 2003))
+ with ESMTP id <0HIY00BIRVN1D9@mta6.srv.hcvlny.cv.net> for agapon@optonline.net
+ (ORCPT agapon@cv-nj.com); Fri, 01 Aug 2003 20:49:50 -0400 (EDT)
+Received: from zeus.cv-nj.com ([208.216.124.246])	by asv7.srv.hcvlny.cv.net
+ (8.12.9/8.12.9) with ESMTP id h720nO2d011288	for <agapon@optonline.net>; Fri,
+ 01 Aug 2003 20:49:25 -0400 (EDT)
+Received: from mta11.srv.hcvlny.cv.net (mta11.srv.hcvlny.cv.net [167.206.5.46])
+	by zeus.cv-nj.com (8.11.0/8.11.0) with ESMTP id h71N92P14623	for
+ <agapon@cv-nj.com>; Fri, 01 Aug 2003 19:09:02 -0400
+Received: from asv7.srv.hcvlny.cv.net (asv7.srv.hcvlny.cv.net [167.206.5.43])
+ by mta11.srv.hcvlny.cv.net
+ (iPlanet Messaging Server 5.2 HotFix 1.16 (built May 14 2003))
+ with ESMTP id <0HIY0053KVMR4J@mta11.srv.hcvlny.cv.net> for agapon@cv-nj.com;
+ Fri, 01 Aug 2003 20:49:40 -0400 (EDT)
+Received: from terminus.foundation.invalid
+ (ool-4355489e.dyn.optonline.net [67.85.72.158])	by asv7.srv.hcvlny.cv.net
+ (8.12.9/8.12.9) with ESMTP id h720nJ2d011202	for <agapon@cv-nj.com>; Fri,
+ 01 Aug 2003 20:49:20 -0400 (EDT)
+Received: from localhost.foundation.invalid
+ (localhost.foundation.invalid [127.0.0.1])	by terminus.foundation.invalid
+ (8.12.6p2/8.12.3) with ESMTP id h720naPh083024	for <agapon@cv-nj.com>; Fri,
+ 01 Aug 2003 20:49:36 -0400 (EDT envelope-from avg@foundation.invalid)
+Date: Fri, 01 Aug 2003 20:49:36 -0400 (EDT)
+From: Andriy Gapon <agapon@cv-nj.com>
+Subject: test 1 (fwd)
+To: agapon@cv-nj.com
+Message-id: <20030801204807.F83023@terminus.foundation.invalid>
+MIME-version: 1.0
+Content-type: multipart/mixed; boundary="Boundary_(ID_LcH9EJ7vCFE02L9uj3dWiQ)"
+X-Authentication-warning: terminus.foundation.invalid: avg set sender to
+ agapon@cv-nj.com using -f
+Original-recipient: rfc822;agapon@cv-nj.com
+
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
+  Send mail to mime@docserver.cac.washington.edu for more info.
+
+--Boundary_(ID_LcH9EJ7vCFE02L9uj3dWiQ)
+Content-type: TEXT/PLAIN; charset=US-ASCII
+Content-transfer-encoding: 7BIT
+
+
+--Boundary_(ID_LcH9EJ7vCFE02L9uj3dWiQ)
+Content-id: <20030801204809.K83023@terminus.foundation.invalid>
+Content-type: message/rfc822; CHARSET=US-ASCII
+Content-description: test 1 (fwd)
+
+Return-path: <agapon@cv-nj.com>
+Received: from terminus.foundation.invalid
+ (localhost.foundation.invalid [127.0.0.1])	by terminus.foundation.invalid
+ (8.12.6p2/8.12.3) with ESMTP id h720kKPg083017	for
+ <avg@terminus.foundation.invalid>; Fri,
+ 01 Aug 2003 20:46:20 -0400 (EDT envelope-from agapon@cv-nj.com)
+Received: (from avg@localhost)	by terminus.foundation.invalid
+ (8.12.6p2/8.12.6/Submit) id h720kKsu083016	for avg; Fri,
+ 01 Aug 2003 20:46:20 -0400 (EDT)
+Received: from s1.optonline.net [167.206.112.6]	by localhost with POP3
+ (fetchmail-6.2.2)	for avg@localhost (single-drop); Fri,
+ 01 Aug 2003 20:46:20 -0400 (EDT)
+Received: from mta5.srv.hcvlny.cv.net (mta5.srv.hcvlny.cv.net [167.206.5.31])
+ by mstr8.srv.hcvlny.cv.net
+ (iPlanet Messaging Server 5.2 HotFix 1.16 (built May 14 2003))
+ with ESMTP id <0HIY003KEVGNE9@mstr8.srv.hcvlny.cv.net> for
+ agapon@optonline.net; Fri, 01 Aug 2003 20:45:59 -0400 (EDT)
+Received: from asv8.srv.hcvlny.cv.net (asv8.srv.hcvlny.cv.net [167.206.5.47])
+ by mta5.srv.hcvlny.cv.net
+ (iPlanet Messaging Server 5.2 HotFix 1.16 (built May 14 2003))
+ with ESMTP id <0HIY007OQVGR7R@mta5.srv.hcvlny.cv.net> for agapon@optonline.net
+ (ORCPT agapon@optonline.net); Fri, 01 Aug 2003 20:46:04 -0400 (EDT)
+Received: from edge.foundation.invalid
+ (ool-4355489e.dyn.optonline.net [67.85.72.158])	by asv8.srv.hcvlny.cv.net
+ (8.12.9/8.12.9) with ESMTP id h720jQgH019233	for <agapon@optonline.net>; Fri,
+ 01 Aug 2003 20:45:27 -0400 (EDT)
+Received: from cv-nj.com (localhost.foundation.invalid [127.0.0.1])
+	by edge.foundation.invalid (8.12.8p1/8.12.6) with ESMTP id h720jxR2005483	for
+ <agapon@optonline.net>; Fri,
+ 01 Aug 2003 20:46:00 -0400 (EDT envelope-from agapon@cv-nj.com)
+Date: Fri, 01 Aug 2003 20:45:59 -0400
+From: Andriy Gapon <agapon@cv-nj.com>
+Subject: test 1
+To: agapon@optonline.net
+Message-id: <3F2B09C7.8070007@cv-nj.com>
+MIME-version: 1.0
+Content-type: multipart/mixed; boundary="Boundary_(ID_Uqg1CvpomgjmXwYqHFeQWA)"
+X-Accept-Language: en, uk, ru
+User-Agent: Mozilla/5.0 (X11; U; FreeBSD i386; en-US; rv:1.4) Gecko/20030701
+X-Authentication-warning: terminus.foundation.invalid: avg set sender to
+ agapon@cv-nj.com using -f
+Original-recipient: rfc822;agapon@optonline.net
+
+
+This is a multi-part message in MIME format.
+
+--Boundary_(ID_Uqg1CvpomgjmXwYqHFeQWA)
+Content-type: text/plain; charset=us-ascii; format=flowed
+Content-transfer-encoding: 7BIT
+
+
+This is test 1 message.
+
+--Boundary_(ID_Uqg1CvpomgjmXwYqHFeQWA)
+Content-type: text/plain; name=cats.sig
+Content-transfer-encoding: 7BIT
+Content-disposition: inline; filename=cats.sig
+
+Andriy Gapon
+*
+"...the last thing we need is a new production strategy for cats." 
+Wayne Pacelle, senior vice president, The Humane Society of the United States
+
+--Boundary_(ID_Uqg1CvpomgjmXwYqHFeQWA)--
+
+--Boundary_(ID_LcH9EJ7vCFE02L9uj3dWiQ)--
+
+--Boundary_(ID_HpMGlUgbw8V8lPAgHS5chQ)--
+
