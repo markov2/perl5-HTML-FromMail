@@ -26,6 +26,7 @@ my %prereq =
  ( Mail::Box           => 2.051 # used everywhere
  , HTML::FromText      => 2.03  # for HTML::FromMail::Default::HTMLifiers
  , OODoc::Template     => 0.01  # default template system
+ , Test::Pod           => 1.00
  );
 
 my $has_readkey;
@@ -146,9 +147,28 @@ print <<'DONE';
 DONE
 
 WriteMakefile
- ( NAME	        => 'HTML::FromMail'
- , VERSION_FROM => 'lib/HTML/FromMail.pm'
- , AUTHOR       => 'Mark Overmeer'
- , ABSTRACT     => 'Convert E-mail into HTML'
- , PREREQ_PM    => \%prereq
+ ( NAME	      => 'HTML::FromMail'
+ , VERSION    => '0.11'
+ , AUTHOR     => 'Mark Overmeer'
+ , ABSTRACT   => 'Convert E-mail into HTML'
+ , PREREQ_PM  => \%prereq
  );
+
+sub MY::postamble { <<'__POSTAMBLE' }
+
+# for OODoc's oodist, DIST
+RAWDIR		= ../public_html/html-from-mail/raw
+DISTDIR		= ../public_html/html-from-mail/source
+LICENSE		= artistic
+
+# for OODoc's oodist, POD
+FIRST_YEAR	= 2003,2004,2007
+EMAIL		= perl@overmeer.net
+WEBSITE		= http://perl.overmeer.net/html-from-mail/
+
+# for HTML
+HTML_OUTPUT     = ../public_html/html-from-mail/html
+HTML_DOCROOT    = /html-from-mail/html
+HTML_PACKAGE    = ../public_html/html-from-mail/htmlpkg
+
+__POSTAMBLE

@@ -309,8 +309,9 @@ sub export($@)
     $self->log(ERROR => "No output directory or file specified."), return
        unless defined $output;
 
-    $self->log(ERROR => "Cannot create output directory $output: $!"), return
-       unless -d $output || mkdir $output;
+# this cannot be right when $output isa filename?
+#   $self->log(ERROR => "Cannot create output directory $output: $!"), return
+#      unless -d $output || mkdir $output;
 
     my $topic     = $producer->topic;
     my @files;

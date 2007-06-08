@@ -216,14 +216,15 @@ Only show the address of the users.
 Create a link behind the phrase.  In case there is no phrase, the
 address itself is displayed.  This is the most convenient link, if
 you decide to create a link.
- E<lt>a href="mailto:me@example.com"E<gt>My Name E<lt>/a E<gt>
- E<lt>a href="mailto:you@example.com"E<gt>you@example.com E<lt>/a E<gt>
+ <a href="mailto:me@example.com">My Name </a>
+ <a href="mailto:you@example.com">you@example.com </a>
 
 =item * C<'LINK'>
 Often seen, but more for simplicity of implementation is the link
 under the address.  The C<'MAILTO'> is probably easier to understand.
- "My Name" E<lt>a href="mailto:me@example.com"E<gt>me@example.com E<lt>/a E<gt>
- E<lt>a href="mailto:you@example.com"E<gt>you@example.com E<lt>/a E<gt>
+ "My Name" <a href="mailto:me@example.com">me@example.com</a>
+ <a href="mailto:you@example.com">you@example.com</a>
+
 =back
 
 =subsection content HOW
