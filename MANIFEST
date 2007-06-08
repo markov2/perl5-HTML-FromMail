@@ -24,3 +24,4 @@ lib/HTML/FromMail/Object.pm
 lib/HTML/FromMail/Page.pm
 t/00run.t
 t/pod.t
+version

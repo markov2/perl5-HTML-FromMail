@@ -1,3 +1,6 @@
 MANIFEST.extra
+mkdist
+mkdoc
 html/
 test_messages
+version

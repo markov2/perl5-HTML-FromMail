@@ -148,7 +148,7 @@ DONE
 
 WriteMakefile
  ( NAME	      => 'HTML::FromMail'
- , VERSION    => '0.11'
+ , VERSION    => '0.12'
  , AUTHOR     => 'Mark Overmeer'
  , ABSTRACT   => 'Convert E-mail into HTML'
  , PREREQ_PM  => \%prereq
@@ -165,10 +165,5 @@ LICENSE		= artistic
 FIRST_YEAR	= 2003,2004,2007
 EMAIL		= perl@overmeer.net
 WEBSITE		= http://perl.overmeer.net/html-from-mail/
-
-# for HTML
-HTML_OUTPUT     = ../public_html/html-from-mail/html
-HTML_DOCROOT    = /html-from-mail/html
-HTML_PACKAGE    = ../public_html/html-from-mail/htmlpkg
 
 __POSTAMBLE
