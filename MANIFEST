@@ -1,6 +1,7 @@
 ChangeLog
 MANIFEST
 Makefile.PL
+README.md
 examples
 examples/README
 examples/demo.pl
@@ -23,5 +24,4 @@ lib/HTML/FromMail/Message.pm
 lib/HTML/FromMail/Object.pm
 lib/HTML/FromMail/Page.pm
 t/00run.t
-t/pod.t
-version
+xt/99pod.t

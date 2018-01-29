@@ -1,9 +1,12 @@
-
-use strict;
-use warnings;
+# This code is part of distribution HTML-FromMail.  Meta-POD processed with
+# OODoc into POD and HTML manual-pages.  See README.md
+# Copyright Mark Overmeer.  Licensed under the same terms as Perl itself.
 
 package HTML::FromMail::Field;
 use base 'HTML::FromMail::Page';
+
+use strict;
+use warnings;
 
 use Mail::Message::Field::Full;
 
@@ -256,7 +259,7 @@ of capitals.  The correct use of capitals is implemented by
 M<Mail::Message::Field::wellformedName()> and will be used when WELLFORMED
 is selected.  By default, the names are displayed UNCHANGED.
 
-=example using M<HTML::FromMail::Format::Magic>
+=example using HTML::FromMail::Format::Magic
   <!--{name capitals => WELLFORMED}-->
 
 =subsection wrap INTEGER

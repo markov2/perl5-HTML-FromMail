@@ -1,9 +1,12 @@
-
-use strict;
-use warnings;
+# This code is part of distribution HTML-FromMail.  Meta-POD processed with
+# OODoc into POD and HTML manual-pages.  See README.md
+# Copyright Mark Overmeer.  Licensed under the same terms as Perl itself.
 
 package HTML::FromMail;
 use base 'Mail::Reporter';
+
+use strict;
+use warnings;
 
 use File::Spec::Functions;
 use File::Basename qw/basename dirname/;
@@ -60,7 +63,10 @@ Email addresses in the header are not yet formatted as links.
 =back
 
 =section Plans
-There are many extensions planned.
+
+There are many extensions planned; but I have no time to implement
+them.
+
 =over 4
 =item *
 Fields should be treated smartly: links for addresses found in the header,

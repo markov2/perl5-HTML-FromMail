@@ -1,9 +1,12 @@
-
-use strict;
-use warnings;
+# This code is part of distribution HTML-FromMail.  Meta-POD processed with
+# OODoc into POD and HTML manual-pages.  See README.md
+# Copyright Mark Overmeer.  Licensed under the same terms as Perl itself.
 
 package HTML::FromMail::Head;
 use base 'HTML::FromMail::Page';
+
+use strict;
+use warnings;
 
 use HTML::FromMail::Field;
 
