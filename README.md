@@ -3,8 +3,7 @@
   * My extended documentation: <http://perl.overmeer.net/CPAN/>
   * Development via GitHub: <https://github.com/markov2/perl5-HTML-FromMail>
   * Download from CPAN: <ftp://ftp.cpan.org/pub/CPAN/authors/id/M/MA/MARKOV/>
-  * Indexed from CPAN: <http://search.cpan.org/~markov/HTML-FromMail/>
-    and <https://metacpan.org/release/HTML-FromMail>
+  * Indexed from CPAN: <https://metacpan.org/release/HTML-FromMail>
 
 This module is designed to put e-mail related data on web-pages.
 This could be used to create web-mail clients.

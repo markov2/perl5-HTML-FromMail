@@ -148,7 +148,7 @@ DONE
 
 WriteMakefile
  ( NAME	      => 'HTML::FromMail'
- , VERSION    => '0.12'
+ , VERSION    => '0.13'
  , AUTHOR     => 'Mark Overmeer <markov@cpan.org>'
  , ABSTRACT   => 'Convert E-mail into HTML'
  , PREREQ_PM  => \%prereq

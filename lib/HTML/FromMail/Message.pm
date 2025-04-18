@@ -405,7 +405,7 @@ sub disposition($$$)
 =option  type MIME-TYPE
 =default type ''
 Selects the MIME types which are handled by this singlepart block.  You can
-specify the types as defined by M<MIME::Type::equal()>.
+specify the types as defined by M<MIME::Type::equals()>.
 
 =examples using M<HTML::FromMail::Format::Magic>
  <!--{message}-->
@@ -463,7 +463,7 @@ sub htmlAttach($$)
 =option  type MIME-TYPE
 =default type ''
 Selects the MIME types which are handled by this singlepart block.  You can
-specify the types as defined by M<MIME::Type::equal()>.
+specify the types as defined by M<MIME::Type::equals()>.
 
 The C<preview> container defines C<url>, C<size> and C<type>
 tags for the template, which describe the attachment file.  Besides,

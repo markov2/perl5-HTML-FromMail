@@ -4,8 +4,14 @@
 Unless noted otherwise, these changes where initiated and applied by
 Mark Overmeer.
 
+version 0.13:
+
+	Improvements:
+	- small doc-fixes.
+
 version 0.12: Mon Jan 29 23:49:23 CET 2018
 
+	Improvements:
 	- do not run pod.t in devel environment.
 	- convert to GIT
 	- publish via GitHub
