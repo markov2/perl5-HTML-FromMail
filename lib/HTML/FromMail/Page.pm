@@ -1,6 +1,7 @@
-# This code is part of distribution HTML-FromMail.  Meta-POD processed with
-# OODoc into POD and HTML manual-pages.  See README.md
-# Copyright Mark Overmeer.  Licensed under the same terms as Perl itself.
+#oodist: *** DO NOT USE THIS VERSION FOR PRODUCTION ***
+#oodist: This file contains OODoc-style documentation which will get stripped
+#oodist: during its release in the distribution.  You can use this file for
+#oodist: testing, however the code of this development version may be broken!
 
 package HTML::FromMail::Page;
 use base 'HTML::FromMail::Object';
@@ -8,6 +9,7 @@ use base 'HTML::FromMail::Object';
 use strict;
 use warnings;
 
+#--------------------
 =chapter NAME
 
 HTML::FromMail::Page - base class for outputting pages
@@ -33,8 +35,8 @@ location information.
 =cut
 
 sub lookup($$)
-{   my ($self, $label, $args) = @_;
-    $args->{formatter}->lookup($label, $args);
+{	my ($self, $label, $args) = @_;
+	$args->{formatter}->lookup($label, $args);
 }
 
 1;

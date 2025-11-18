@@ -1,6 +1,7 @@
-# This code is part of distribution HTML-FromMail.  Meta-POD processed with
-# OODoc into POD and HTML manual-pages.  See README.md
-# Copyright Mark Overmeer.  Licensed under the same terms as Perl itself.
+#oodist: *** DO NOT USE THIS VERSION FOR PRODUCTION ***
+#oodist: This file contains OODoc-style documentation which will get stripped
+#oodist: during its release in the distribution.  You can use this file for
+#oodist: testing, however the code of this development version may be broken!
 
 package HTML::FromMail::Default::HTMLifiers;
 
@@ -10,6 +11,7 @@ use warnings;
 use HTML::FromText;
 use Carp;
 
+#--------------------
 =chapter NAME
 
 Html::FromMail::Default::HTMLifiers - convert data type to HTML
@@ -22,39 +24,38 @@ Html::FromMail::Default::HTMLifiers - convert data type to HTML
 
 =cut
 
-our @htmlifiers =
- ( 'text/plain' => \&htmlifyText
-#, 'text/html'  => \&htmlifyHtml
- );
+our @htmlifiers = (
+	'text/plain' => \&htmlifyText,
+#	'text/html'  => \&htmlifyHtml,
+);
 
 =function htmlifyText PAGE, MESSAGE, PART, ARGS
-Convert plain text into HTML using M<HTML::FromText>.  Configuration
+Convert plain text into HTML using HTML::FromText.  Configuration
 can be supplied as show in the example.  The defaults are set to mode C<pre>
 with C<urls>, C<email>, C<bold>, and C<underline>.
 
 =example configuring text conversion
-  my $f = M<HTML::FromMail>->new
-  ( settings =>
-      { message        => { disposition => \&my_disposer }
-      , HTML::FromText => { block_code  => 0 }
-      }
+  my $f = HTML::FromMail->new(
+    settings =>
+      { message        => { disposition => \&my_disposer },
+        HTML::FromText => { block_code  => 0 },
+      },
   );
 
 =cut
 
 sub htmlifyText($$$$)
-{   my ($page, $message, $part, $args) = @_;
-    my $main     = $args->{main} or confess;
-    my $settings = $main->settings('HTML::FromText')
-     || { pre => 1, urls => 1, email => 1, bold => 1, underline => 1};
+{	my ($page, $message, $part, $args) = @_;
+	my $main     = $args->{main} or confess;
+	my $settings = $main->settings('HTML::FromText')
+	  || +{ pre => 1, urls => 1, email => 1, bold => 1, underline => 1};
 
-    my $f = HTML::FromText->new($settings)
-       or croak "Cannot create an HTML::FromText object";
+	my $f = HTML::FromText->new($settings)
+		or croak "Cannot create an HTML::FromText object";
 
-    { image => ''            # this is not an image
-    , html  => { text => $f->parse($part->decoded->string)
-               }
-    }
+	{	image => '',            # this is not an image
+		html  => { text => $f->parse($part->decoded->string) },
+	}
 }
 
 =function htmlifyHtml PAGE, MESSAGE, PART, ARGS

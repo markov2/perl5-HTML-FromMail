@@ -1,6 +1,7 @@
-# This code is part of distribution HTML-FromMail.  Meta-POD processed with
-# OODoc into POD and HTML manual-pages.  See README.md
-# Copyright Mark Overmeer.  Licensed under the same terms as Perl itself.
+#oodist: *** DO NOT USE THIS VERSION FOR PRODUCTION ***
+#oodist: This file contains OODoc-style documentation which will get stripped
+#oodist: during its release in the distribution.  You can use this file for
+#oodist: testing, however the code of this development version may be broken!
 
 package HTML::FromMail::Field;
 use base 'HTML::FromMail::Page';
@@ -10,6 +11,7 @@ use warnings;
 
 use Mail::Message::Field::Full;
 
+#--------------------
 =chapter NAME
 
 HTML::FromMail::Field - output a header field as HTML
@@ -27,12 +29,11 @@ HTML::FromMail::Field - output a header field as HTML
 =cut
 
 sub init($)
-{   my ($self, $args) = @_;
-    $args->{topic} ||= 'field';
+{	my ($self, $args) = @_;
+	$args->{topic} ||= 'field';
 
-    $self->SUPER::init($args) or return;
-
-    $self;
+	$self->SUPER::init($args) or return;
+	$self;
 }
 
 =method fromHead HEAD, NAME, ARGS
@@ -42,8 +43,8 @@ than once, some may not be present.
 =cut
 
 sub fromHead($$@)
-{   my ($self, $head, $name, $args) = @_;
-    $head->study($name);
+{	my ($self, $head, $name, $args) = @_;
+	$head->study($name);
 }
 
 =method htmlName ARGS
@@ -57,13 +58,11 @@ See L</names HOW>.
 =cut
 
 sub htmlName($$$)
-{   my ($self, $field, $args) = @_;
-    return unless defined $field;
+{	my ($self, $field, $args) = @_;
+	defined $field or return;
 
-    my $reform = $args->{capitals} || $self->settings->{names}
-              || 'UNCHANGED';
-
-    $self->plain2html($reform ? $field->wellformedName : $field->Name);
+	my $reform = $args->{capitals} || $self->settings->{names} || 'UNCHANGED';
+	$self->plain2html($reform ? $field->wellformedName : $field->Name);
 }
 
 =method htmlBody ARGS
@@ -72,7 +71,7 @@ header line.
 
 =option  content FOLDED|REFOLD|UNFOLDED|DECODED
 =default content <depends>
-How to included the body of the field.  If a C<wrap> is defined, then
+How to included the body of the field.  If a P<wrap> is defined, then
 REFOLD is taken as default, otherwise DECODED is the default. See
 L</content HOW>
 
@@ -87,29 +86,25 @@ See L</address HOW>
 =cut
 
 sub htmlBody($$$)
-{   my ($self, $field, $args) = @_;
+{	my ($self, $field, $args) = @_;
 
-    my $settings = $self->settings;
+	my $settings = $self->settings;
 
-    my $wrap    = $args->{wrap} || $settings->{wrap};
-    my $content = $args->{content}
-               || $settings->{content}
-               || (defined $wrap && 'REFOLD')
-               || 'DECODED';
+	my $wrap    = $args->{wrap} || $settings->{wrap};
+	my $content = $args->{content} || $settings->{content} || (defined $wrap && 'REFOLD') || 'DECODED';
 
-    if($field->isa('Mail::Message::Field::Addresses'))
-    {   my $how = $args->{address} || $settings->{address} || 'MAILTO';
-        return $self->addressField($field, $how, $args)
-           unless $how eq 'PLAIN';
-    }
+	if($field->isa('Mail::Message::Field::Addresses'))
+	{	my $how = $args->{address} || $settings->{address} || 'MAILTO';
+		$how eq 'PLAIN' or return $self->addressField($field, $how, $args)
+	}
 
-    return $self->plain2html($field->unfoldedBody)
-       if $content eq 'UNFOLDED';
+	return $self->plain2html($field->unfoldedBody)
+		if $content eq 'UNFOLDED';
 
-    $field->setWrapLength($wrap || 78)
-       if $content eq 'REFOLD';
+	$field->setWrapLength($wrap || 78)
+		if $content eq 'REFOLD';
 
-    $self->plain2html($field->foldedBody);
+	$self->plain2html($field->foldedBody);
 }
 
 =method addressField FIELD, HOW, ARGS
@@ -120,39 +115,37 @@ C<'PLAIN'>, C<'MAILTO'>, or C<'LINK'>.  See L</address HOW> for details.
 =cut
 
 sub addressField($$$)
-{   my ($self, $field, $how, $args) = @_;
-    return $self->plain2html($field->foldedBody) if $how eq 'PLAIN';
+{	my ($self, $field, $how, $args) = @_;
+	return $self->plain2html($field->foldedBody) if $how eq 'PLAIN';
 
-    return join ",<br />"
-            , map {$_->address}
-                $field->addresses if $how eq 'ADDRESS';
-    
-    return join ",<br />"
-            , map {$_->phrase || $_->address}
-                $field->addresses if $how eq 'PHRASE';
-    
-    if($how eq 'MAILTO')
-    {   my @links;
-        foreach my $address ($field->addresses)
-        {   my $addr   = $address->address;
-            my $phrase = $address->phrase || $addr;
-            push @links, qq[<a href="mailto:$addr">$phrase</a>];
-        }
-        return join ",<br />", @links;
-    }
+	return join ",<br />", map $_->address, $field->addresses
+		if $how eq 'ADDRESS';
 
-    if($how eq 'LINK')
-    {   my @links;
-        foreach my $address ($field->addresses)
-        {   my $addr   = $address->address;
-            my $phrase = $address->phrase || '';
-            push @links, qq[$phrase &lt;<a href="mailto:$addr">$addr</a>&gt;];
-        }
-        return join ",<br />", @links;
-    }
+	return join ",<br />", map {$_->phrase || $_->address} $field->addresses
+		if $how eq 'PHRASE';
 
-    $self->log(ERROR => "Don't know address field formatting '$how'");
-    '';
+	if($how eq 'MAILTO')
+	{	my @links;
+		foreach my $address ($field->addresses)
+		{	my $addr   = $address->address;
+			my $phrase = $address->phrase || $addr;
+			push @links, qq[<a href="mailto:$addr">$phrase</a>];
+		}
+		return join ",<br />", @links;
+	}
+
+	if($how eq 'LINK')
+	{	my @links;
+		foreach my $address ($field->addresses)
+		{	my $addr   = $address->address;
+			my $phrase = $address->phrase || '';
+			push @links, qq[$phrase &lt;<a href="mailto:$addr">$addr</a>&gt;];
+		}
+		return join ",<br />", @links;
+	}
+
+	$self->log(ERROR => "Don't know address field formatting '$how'");
+	'';
 }
 
 =method htmlAddresses FIELD, ARGS
@@ -160,26 +153,27 @@ Returns an array with address info.
 =cut
 
 sub htmlAddresses($$)
-{   my ($self, $field, $args) = @_;
-    return undef unless $field->can('addresses');
+{	my ($self, $field, $args) = @_;
+	$field->can('addresses') or return undef;
 
-    my @addrs;
-    foreach my $address ($field->addresses)
-    {  my %addr = 
-        ( email   => $address->address
-        , address => $self->plain2html($address->string)
-        );
+	my @addrs;
+	foreach my $address ($field->addresses)
+	{	my %addr = (
+			email   => $address->address,
+			address => $self->plain2html($address->string),
+		);
 
-       if(defined(my $phrase = $address->phrase))
-       {   $addr{phrase} = $self->plain2html($phrase);
-       }
+		if(defined(my $phrase = $address->phrase))
+		{	$addr{phrase} = $self->plain2html($phrase);
+		}
 
-       push @addrs, \%addr;
-    }
+		push @addrs, \%addr;
+	}
 
-    \@addrs;
+	\@addrs;
 }
 
+#--------------------
 =chapter DETAILS
 
 =section Settings
@@ -192,41 +186,41 @@ for topic C<field>:
 Some fields are pre-defined to contain e-mail addresses.  In many web-based
 clients, you see that these addresses are bluntly linked to, but you here
 have a choice.  As example, the header field contains the address
- "My Name" E<lt>me@example.comE<gt>
- you@example.com
+  "My Name" E<lt>me@example.comE<gt>
+  you@example.com
 
 The possible settings for this parameter are
 =over 4
 =item * C<'PLAIN'>
 Show the address as was specified in the message header, without smart
 processing.
- "My Name" E<lt>me@example.com E<gt>
- you@example.com
+  "My Name" E<lt>me@example.com E<gt>
+  you@example.com
 
 =item * C<'PHRASE'>
 According to the standards, the phrase is ment to represent the user
 in an understandable way.  Usually this is the full name of the user.
 No link is made.
- My Name
- you@example.com
+  My Name
+  you@example.com
 
 =item * C<'ADDRESS'>
 Only show the address of the users.
- my@example.com
- you@example.com
+  my@example.com
+  you@example.com
 
 =item * C<'MAILTO'>
 Create a link behind the phrase.  In case there is no phrase, the
 address itself is displayed.  This is the most convenient link, if
 you decide to create a link.
- <a href="mailto:me@example.com">My Name </a>
- <a href="mailto:you@example.com">you@example.com </a>
+  <a href="mailto:me@example.com">My Name </a>
+  <a href="mailto:you@example.com">you@example.com </a>
 
 =item * C<'LINK'>
 Often seen, but more for simplicity of implementation is the link
 under the address.  The C<'MAILTO'> is probably easier to understand.
- "My Name" <a href="mailto:me@example.com">me@example.com</a>
- <a href="mailto:you@example.com">you@example.com</a>
+  "My Name" <a href="mailto:me@example.com">me@example.com</a>
+  <a href="mailto:you@example.com">you@example.com</a>
 
 =back
 

@@ -1,8 +1,48 @@
 use ExtUtils::MakeMaker;
 
-require 5.006_001;
+require 5.016;
 
 use IO::Handle;
+
+my $version  = '0.13';
+my $git      = "https://github.com/markov2/perl5-HTML-FromMail";
+my $publish  = "../public_html/html-frommail";
+my $homepage = "http://perl.overmeer.net/CPAN/";
+
+my %oodist   = (
+	oodoc_version => 3.05,
+	first_year    => 2003,
+	email         => "markov\@cpan.org",
+
+	include  => [
+	],
+
+	use      => [
+	],
+
+	parser   => {
+		syntax         => 'markov',
+		skip_links     => [
+		],
+		pmhead         => undef,
+	},
+
+	tests    => {
+	},
+
+	release  => {
+		publish        => "$publish/source",
+	},
+
+	raw      => {
+		publish        => "$publish/raw",
+	},
+
+	generate => [ {
+		format         => 'pod3',
+		podtail        => undef,
+	}, ],
+);
 
 my @optional =
 (
@@ -62,12 +102,10 @@ while(my ($module, $version) = each %prereq)
         push @errors, $module;
     }
     elsif($module->VERSION < $version)
-    {   print "    $module version ",$module->VERSION
-            , " is outdated; requires $version\n";
+    {   print "    $module version ", $module->VERSION, " is outdated; requires $version\n";
     }
     else
-    {   print "    $module version ",$module->VERSION
-            , " is ok (required is $version)\n";
+    {   print "    $module version ", $module->VERSION , " is ok (required is $version)\n";
     }
 }
 
@@ -98,12 +136,10 @@ foreach my $optional (@optional)
     {   print "**** Optional $module failed:\n$@\n";
     }
     elsif($module->VERSION < $version )
-    {   print "**** Optional $module too old: requires $version but is ",
-            $module->VERSION,"\n";
+    {   print "**** Optional $module too old: requires $version but is ", $module->VERSION,"\n";
     }
     else
-    {   print "**** Found optional $module version ", $module->VERSION,
-             " (required is $version)\n";
+    {   print "**** Found optional $module version ", $module->VERSION, " (required is $version)\n";
         next;
     }
 
@@ -129,7 +165,7 @@ foreach my $optional (@optional)
     {   $install = $key eq 'y' ? 'y' : 'n';
     }
 
-    next unless $install eq 'y';
+    $install eq 'y' or next;
 
     my $distr = $args{distr} || $module;
 
@@ -147,38 +183,43 @@ print <<'DONE';
 DONE
 
 WriteMakefile
- ( NAME	      => 'HTML::FromMail'
- , VERSION    => '0.13'
- , AUTHOR     => 'Mark Overmeer <markov@cpan.org>'
- , ABSTRACT   => 'Convert E-mail into HTML'
- , PREREQ_PM  => \%prereq
- , LICENSE    => 'perl_5'
+	NAME       => 'HTML::FromMail',
+	VERSION    => $version,
+	AUTHOR     => 'Mark Overmeer <markov@cpan.org>',
+	ABSTRACT   => 'Convert E-mail into HTML',
+	LICENSE    => 'perl_5',
 
- , META_MERGE =>
-      { 'meta-spec' => { version => 2 }
-      , resources  =>
-          { repository =>
-              { type => 'git'
-              , url  => 'https://github.com/markov2/perl5-HTML-FromMail.git'
-              , web  => 'https://github.com/markov2/perl5-HTML-FromMail'
-              }
-          , homepage => 'http://perl.overmeer.net/CPAN/'
-          , license  => [ 'http://dev.perl.org/licenses/' ]
-          }
-      }
+	META_MERGE => {
+		'meta-spec' => { version => 2 },
+		resources   => {
+			repository => {
+				type => 'git',
+				url  => "$git.git",
+				web  => $git,
+			},
+			bugtracker => {
+				web  => "$git/issues",
+			},
+			homepage => $homepage,
+			license  => [ 'http//dev.perl.org/licenses/' ],
+		},
+		prereqs => {
+			runtime => {
+				requires => \%prereq,
+			},
+			develop => {
+				requires => {
+					'OODoc' => '3.00',
+				},
+			},
+			test => {
+				requires => {
+					'Test::More' => 1.00,
+					'Test::Pod'  => 1.00,
+				},
+			},
+		},
 
- );
-
-sub MY::postamble { <<'__POSTAMBLE' }
-
-# for OODoc's oodist, DIST
-RAWDIR		= ../public_html/html-frommail/raw
-DISTDIR		= ../public_html/html-frommail/source
-LICENSE		= perl
-
-# for OODoc's oodist, POD
-FIRST_YEAR	= 2003
-EMAIL		= markov@cpan.org
-WEBSITE		= http://perl.overmeer.net/CPAN/
-
-__POSTAMBLE
+		# You may use multiple set-ups, see "oodist --make"
+		x_oodist => \%oodist,
+	};

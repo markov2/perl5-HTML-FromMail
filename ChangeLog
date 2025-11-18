@@ -9,6 +9,8 @@ version 0.13:
 	Improvements:
 	- small doc-fixes.
 	- add .gitignore
+	- convert style to OODoc 3
+	- convert install process to OODoc 3.05
 
 version 0.12: Mon Jan 29 23:49:23 CET 2018
 
