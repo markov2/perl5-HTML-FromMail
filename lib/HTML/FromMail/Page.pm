@@ -24,11 +24,11 @@ HTML::FromMail::Page - base class for outputting pages
 
 =cut
 
-=method lookup LABEL, ARGS
+=method lookup $label, \%options
 Look-up, in a formatter dependent way, what the value related to a certain
-LABEL is.  The location which is being produced on the moment that this
+$label is.  The location which is being produced on the moment that this
 method is called is stored somewhere in the OPTIONS.  The formatter
-(which is also in the OPTIONS) is called to get the value based on that
+(which is also in the %options) is called to get the value based on that
 location information.
 
 =requires formatter OBJECT

@@ -9,10 +9,10 @@ use base 'HTML::FromMail::Page';
 use strict;
 use warnings;
 
-use HTML::FromMail::Head;
-use HTML::FromMail::Field;
-use HTML::FromMail::Default::Previewers;
-use HTML::FromMail::Default::HTMLifiers;
+use HTML::FromMail::Head  ();
+use HTML::FromMail::Field ();
+use HTML::FromMail::Default::Previewers ();
+use HTML::FromMail::Default::HTMLifiers ();
 
 use Carp;
 use File::Basename 'basename';
@@ -31,10 +31,8 @@ work.  Best take a look at the examples directory.
 
 =chapter METHODS
 
-=c_method new OPTIONS
-
+=c_method new %options
 =default topic C<'message'>
-
 =cut
 
 sub init($)
@@ -67,18 +65,16 @@ sub init($)
 	$self;
 }
 
-=method createAttachment MESSAGE, PART, ARGS
-Create an attachment file, and return a hash with information about
+=method createAttachment $message, $part, \%options
+Create an attachment file, and return a HASH with information about
 that file.  Returns undef if creation fails.
 
 This method is used by M<htmlAttach()> and M<htmlPreview()> to create
 an actual attachment file.  It defines C<url>, C<size> and C<type>
 tags for the template.
 
-=requires outdir DIRECTORY
-The name of the directory where the external file will be produced
-must be part of the ARGS hash.
-
+=requires outdir $directory
+The name of the $directory where the external file will be produced.
 =cut
 
 my $attach_id = 0;
@@ -118,7 +114,7 @@ Returns the header text producting object.
 
 sub header() { $_[0]->{HFM_head} }
 
-=method htmlField MESSAGE, ARGS
+=method htmlField $message, \%options
 Returns the field definition for the currently active message part. When
 the formatter sees this is a final token, then only the body of the
 field is returned (and the options of M<HTML::FromMail::Field::htmlBody()>
@@ -128,13 +124,13 @@ captured to be used later.
 =requires name STRING
 
 =option  decode BOOLEAN
-=default decode <true> if possible
+=default decode true if possible
 
-=option  from PART|PARENT|MESSAGE
-=default from PART
-The source of this field: the currently active PART (which may be the
-main message), the PARENT of the active part (defaults to the message),
-or the main MESSAGE itself.
+=option  from 'PART'|'PARENT'|$message
+=default from 'PART'
+The source of this field: the currently active 'PART' (which may be the
+main message), the 'PARENT' of the active part (defaults to the message),
+or the main $message itself.
 
 =examples using HTML::FromMail::Format::Magic
   <!--{field name => To, content => REFOLD, wrap => 20}-->
@@ -173,8 +169,8 @@ sub htmlField($$)
 	join "<br />\n", map $f->htmlBody($_, $args), @fields;
 }
 
-=method htmlSubject MESSAGE, ARGS
-Get the subject field from the message's header, just a short-cut
+=method htmlSubject $message, \%options
+Get the subject field from the $message's header, just a short-cut
 for specifying M<htmlField(name)> with C<subject>.
 
 =example using HTML::FromMail::Format::Magic
@@ -190,7 +186,7 @@ sub htmlSubject($$)
 	$self->htmlField($message, \%args);
 }
 
-=method htmlName MESSAGE, ARGS
+=method htmlName $message, \%options
 Produce the name of a field.  This tag can only be used inside a field
 container. See M<HTML::FromMail::Field::htmlName()> for the use and
 options.
@@ -207,7 +203,7 @@ sub htmlName($$)
 	$self->fields->htmlName($field, $args);
 }
 
-=method htmlBody MESSAGE, ARGS
+=method htmlBody $message, \%options
 Produce the body of a field.  This tag can only be used inside a field
 container. See M<HTML::FromMail::Field::htmlBody()> for the use and
 options.
@@ -224,7 +220,7 @@ sub htmlBody($$)
 	$self->fields->htmlBody($field, $args);
 }
 
-=method htmlAddresses MESSAGE, ARGS
+=method htmlAddresses $message, \%options
 Produce data about addresses which are in the field.  This method uses
 M<HTML::FromMail::Field::htmlAddresses()> for that.
 
@@ -240,7 +236,7 @@ sub htmlAddresses($$)
 	$self->fields->htmlAddresses($field, $args);
 }
 
-=method htmlHead MESSAGE, ARGS
+=method htmlHead $message, \%options
 Defines the fields of a header.  The options are provided by
 M<HTML::FromMail::Head::fields()>.
 
@@ -272,8 +268,8 @@ sub htmlHead($$)
 	"<pre>@{ [ map $_->string, @fields ] }</pre>\n";
 }
 
-=method htmlMessage MESSAGE, ARGS
-Encapsulated code which is producing the message, which may
+=method htmlMessage $message, \%options
+Encapsulated code which is producing the $message, which may
 be a multipart.  You have to defined the message block when
 you use the part (see M<htmlPart()>) tag.  If you do not use
 that, you do not need this.
@@ -294,8 +290,8 @@ sub htmlMessage($$)
 	+{ message_text => $args->{formatter}->containerText($args) };
 }
 
-=method htmlMultipart MESSAGE, ARGS
-Encapsulates text to be produced when the message(-part) is a
+=method htmlMultipart $message, \%options
+Encapsulates text to be produced when the $message(-part) is a
 multipart.
 =cut
 
@@ -308,8 +304,8 @@ sub htmlMultipart($$)
 	+{ type => $body->mimeType->type, size => $body->size };
 }
 
-=method htmlNested MESSAGE, ARGS
-Contains text to be produced when the message(-part) is a
+=method htmlNested $message, \%options
+Contains text to be produced when the $message(-part) is a
 nested message; encapsulated in a message/rfc822.
 =cut
 
@@ -324,10 +320,10 @@ sub htmlNested($$)
 	[ +{ part_number => $partnr . '1', part_object => $current->body->nested } ];
 }
 
-=method htmlifier MIME-TYPE
+=method htmlifier $mime_type
 Returns the code reference for a routine which can create html
-for the objects of the specified MIME-TYPE.  The TYPE may be a (smartly
-overloaded) L<MIME::Type> object. The behaviour can be changed with
+for the objects of the specified $mime_type.  The type may be a (smartly
+overloaded) MIME::Type object. The behaviour can be changed with
 the C<htmlifiers> setting.
 =cut
 
@@ -340,10 +336,10 @@ sub htmlifier($)
 	undef;
 }
 
-=method previewer MIME-TYPE
+=method previewer $mime_type
 Returns the code reference for a routine which can create a preview
-for the objects of the specified MIME-TYPE.  The TYPE may be a (smartly
-overloaded) L<MIME::Type> object.  The behaviour can be changed with
+for the objects of the specified $mime_type.  The type may be a (smartly
+overloaded) MIME::Type object.  The behaviour can be changed with
 the C<previewers> setting.
 =cut
 
@@ -356,11 +352,10 @@ sub previewer($)
 	undef;
 }
 
-=method disposition MESSAGE, PART, ARGS
+=method disposition $message, $part, \%options
 Returns a string, which is either C<inline>, C<attach>, or C<preview>,
-which indicates how the part of the message should be formatted.
+which indicates how the $part of the $message should be formatted.
 This can be changed with setting C<disposition>.
-
 =cut
 
 sub disposition($$$)
@@ -390,11 +385,11 @@ sub disposition($$$)
 	$disp->($message, $part, $sugg, $args)
 }
 
-=method htmlInline
-=option  type MIME-TYPE
+=method htmlInline $message, \%options
+=option  type $mime_type
 =default type ''
-Selects the MIME types which are handled by this singlepart block.  You can
-specify the types as defined by M<MIME::Type::equals()>.
+Selects the $mime_type which is handled by this singlepart block.  Type
+comparison uses MIME::Type, so is smart.
 
 =examples using HTML::FromMail::Format::Magic
   <!--{message}-->
@@ -421,8 +416,7 @@ sub htmlInline($$)
 	+{ %$inline, @attach };
 }
 
-=method htmlAttach
-
+=method htmlAttach $message, \%options
 The C<attach> container defines C<url>, C<size> and C<type>
 tags for the template.
 
@@ -447,11 +441,11 @@ sub htmlAttach($$)
 	\%attach;
 }
 
-=method htmlPreview
+=method htmlPreview $message, \%options
 
-=option  type MIME-TYPE
+=option  type $mime_type
 =default type ''
-Selects the MIME types which are handled by this singlepart block.  You can
+Selects the $mime_type which are handled by this singlepart block.  You can
 specify the types as defined by M<MIME::Type::equals()>.
 
 The C<preview> container defines C<url>, C<size> and P<type>
@@ -496,8 +490,8 @@ sub htmlPreview($$)
 	$previewer->($self, $message, $current, \%attach, $args);
 }
 
-=method htmlForeachPart MESSAGE, ARGS
-Produces html for the parts of a multipart mesasge body.  Each part
+=method htmlForeachPart $message|$part, \%options
+Produces html for the parts of a multipart body.  Each $part
 may be a multipart too.  For each part, the C<message> container
 code is applied recursively.
 
@@ -524,7 +518,6 @@ C<part> tag.
 
 sub htmlForeachPart($$)
 {	my ($self, $message, $args) = @_;
-
 	my $part     = $self->lookup('part_object', $args) || $message;
 
 	$part or die "ERROR: foreachPart not used within part";
@@ -546,7 +539,7 @@ sub htmlForeachPart($$)
 	\@part_data;
 }
 
-=method htmlRawText MESSAGE, ARGS
+=method htmlRawText $message, \%options
 Returns the plain text of the body.
 =cut
 
@@ -556,10 +549,9 @@ sub htmlRawText($$)
 	$self->plain2html($part->decoded->string);
 }
 
-=method htmlPart MESSAGE, ARGS
-Apply the C<message> container of the current part on its data.  See example
+=method htmlPart $message|$part, \%options
+Apply the $message container of the current $part on its data.  See example
 in M<htmlForeachPart()>.
-
 =cut
 
 sub htmlPart($$)
@@ -568,7 +560,6 @@ sub htmlPart($$)
 	my $msg     = $format->lookup('message_text', $args);
 
 	defined $msg or warn("Part outside a 'message' block"), return '';
-
 	$format->processText($msg, $args);
 }
 
@@ -604,7 +595,7 @@ of the default algorithm.
       $suggestion eq 'inline' && $part->size > 10_000 ? 'attach' : $suggestion;
   }
 
-=subsection previewers ARRAY-OF-PAIRS
+=subsection previewers \@pairs
 
 For some kinds of message parts, previews can be produced.  This ordered
 list of PAIRS contains mime type with code reference combinations, each
@@ -631,6 +622,7 @@ implemented) in HTML::FromMail::Default::HTMLifiers.
      'text/postscript' => \&prepost,
      'image'           => \&imagemagick,
   );
+
   my @html  = (
      'text/html'       => \&strip_html,
      'text/plain'      => \&plain2html,

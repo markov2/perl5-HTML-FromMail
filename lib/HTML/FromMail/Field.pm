@@ -22,10 +22,8 @@ HTML::FromMail::Field - output a header field as HTML
 
 =chapter METHODS
 
-=c_method new OPTIONS
-
+=c_method new %options
 =default topic C<'field'>
-
 =cut
 
 sub init($)
@@ -36,10 +34,9 @@ sub init($)
 	$self;
 }
 
-=method fromHead HEAD, NAME, ARGS
-Returns the fields from the header with NAME.  Some fields appear more
-than once, some may not be present.
-
+=method fromHead $head, $name, \%args
+Returns the fields from the header with $name.  Some fields appear
+more than once, some may not be present.
 =cut
 
 sub fromHead($$@)
@@ -47,7 +44,7 @@ sub fromHead($$@)
 	$head->study($name);
 }
 
-=method htmlName ARGS
+=method htmlName \%options
 Returns the name of the header field.
 
 =option  capitals 'UNCHANGED'|'WELLFORMED'
@@ -65,11 +62,11 @@ sub htmlName($$$)
 	$self->plain2html($reform ? $field->wellformedName : $field->Name);
 }
 
-=method htmlBody ARGS
+=method htmlBody \%options
 Produce the body of the field: everything after the first colon on the
 header line.
 
-=option  content FOLDED|REFOLD|UNFOLDED|DECODED
+=option  content 'FOLDED'|'REFOLD'|'UNFOLDED'|'DECODED'
 =default content <depends>
 How to included the body of the field.  If a P<wrap> is defined, then
 REFOLD is taken as default, otherwise DECODED is the default. See
@@ -107,11 +104,11 @@ sub htmlBody($$$)
 	$self->plain2html($field->foldedBody);
 }
 
-=method addressField FIELD, HOW, ARGS
-Produce text for a header field containing addresses.  HOW this is done
-is defining the result.  Possible values are C<'ADDRESS'>, C<'PHRASE'>,
-C<'PLAIN'>, C<'MAILTO'>, or C<'LINK'>.  See L</address HOW> for details.
-
+=method addressField $field, $how, ARGS
+Produce text for a header $field containing addresses.  On $how this
+is done is defining the result.  Possible values are C<'ADDRESS'>,
+C<'PHRASE'>, C<'PLAIN'>, C<'MAILTO'>, or C<'LINK'>.  See L</address HOW>
+for details.
 =cut
 
 sub addressField($$$)
@@ -148,7 +145,7 @@ sub addressField($$$)
 	'';
 }
 
-=method htmlAddresses FIELD, ARGS
+=method htmlAddresses $field, \%options
 Returns an array with address info.
 =cut
 

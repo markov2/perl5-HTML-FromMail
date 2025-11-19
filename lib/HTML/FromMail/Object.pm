@@ -20,7 +20,7 @@ HTML::FromMail::Object - base-class for convertable items
 
 =chapter METHODS
 
-=c_method new OPTIONS
+=c_method new %options
 
 =requires topic STRING
 A symbolic representation of the group of objects which can be handled
@@ -30,9 +30,10 @@ this option, so you will usually not specify this yourself.
 The topic is used to get the right default settings and templates.  See
 M<HTML::FromMail::new(settings)> and M<HTML::FromMail::new(templates)>.
 
-=option  settings HASH-OF-HASHES
+=option  settings \%map
 =default settings {}
-Contains the special settings for each of the topics.
+Contains the special settings for each of the topics.  This expects a %map
+from topic names to configuration HASHes.
 See M<HTML::FromMail::new(settings)>.
 
 =cut

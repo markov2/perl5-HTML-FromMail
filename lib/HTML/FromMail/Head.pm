@@ -36,19 +36,20 @@ sub init($)
 	$self;
 }
 
-=ci_method fields MESSAGE, OPTIONS
+=ci_method fields $message, %options
 Collect information about the header fields.
 
-=option  select STRING
+=option  select $patterns
 =default select ''
-Select only the fields which match the patterns found in STRING.  Multiple
-patterns can be specified separated by vertical bars (I<pipes>).  The fields
-are ordered as specified in the STRING.
+Select only the fields which match the $patterns.  Multiple patterns can
+be specified separated by vertical bars (I<pipes>).  The fields returned
+are ordered as specified.
+
 See M<Mail::Message::Head::Complete::grepNames()>.
 
-=option  ignore STRING
+=option  ignore $exclude
 =default ignore undef
-The reverse of P<select>: which fields not to take.
+The reverse of P<select>: patterns listing which fields not to take.
 
 =option  remove_list_group BOOLEAN
 =default remove_list_group true

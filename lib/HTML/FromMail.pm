@@ -292,7 +292,7 @@ option is provided, only the specified files are taken.  If that filename
 is related, it is relative to the C<templates> direcory.  If the filename
 is absolute (starts with a slash), that name is used.
 
-=requires output $directory|$file
+=requires output $directory|$filename
 The $directory where the processed templates for the object are written
 to.  It is only permitted to supply a single $filename when the template
 specifies a single filename as well.

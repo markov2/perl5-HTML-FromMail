@@ -64,7 +64,7 @@ our @previewers = (
 	'image'      => \&previewImage,  # added when Image::Magick is installed
 );
 
-=function previewText PAGE, MESSAGE, PART, ATTACH, ARGS
+=function previewText $page, $mssage, $part, \%attach, \%options
 Produce a small preview of the text, where all wrappig is removed.
 
 =option  text_max_chars INTEGER
@@ -96,11 +96,11 @@ sub previewText($$$$$)
 
 	+{	%$attach,
 		image => '',            # this is not an image
-		html  => { text => $decoded }
+		html  => { text => $decoded },
 	 };
 }
 
-=function previewHtml PAGE, MESSAGE, PART, ATTACH, ARGS
+=function previewHtml $page, $mssage, $part, \%attach, \%options
 Produce a small preview of the html, where first the title is taken
 and put in bold. The rest of the header is removed.  Then the first
 characters of the rest of the content are displayed.
@@ -147,13 +147,13 @@ sub previewHtml($$$$$)
 	}
 	substr($decoded, $max) = '' if length $decoded > $max;
 
-	+{ %$attach,
+	+{	%$attach,
 		image => '',            # this is not an image
-		html  => { text => $decoded }
-	};
+		html  => { text => $decoded },
+	  };
 }
 
-=function previewImage PAGE, MESSAGE, PART, ATTACH, ARGS
+=function previewImage $page, $mssage, $part, \%attach, \%options
 Produce a small preview of the html, where first the title is taken
 and put in bold. The rest of the header is removed.  Then the first
 characters of the rest of the content are displayed.
