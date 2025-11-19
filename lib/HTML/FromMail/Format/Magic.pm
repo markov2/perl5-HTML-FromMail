@@ -11,11 +11,9 @@ use warnings;
 
 use Log::Report 'html-frommail';
 
-use Carp;
-
 BEGIN
 {	eval { require Template::Magic };
-	$@ and die "Install Bundle::Template::Magic for this formatter\n";
+	$@ and error __x"install Template::Magic for this formatter.";
 }
 
 #--------------------
@@ -43,16 +41,20 @@ in larger HTML structures.
 
 =method magic
 Returns the Template::Magic object which is used.
+=error install Template::Magic for this formatter.
 =cut
 
 sub magic() { $_[0]->{HFFM_magic} }
 
 #-----------
 =section Other methods
+
+=method export $object, %options
+=fault cannot write to $out: $!
 =cut
 
 sub export($@)
-{	my ($self, %args) = @_;
+{	my ($self, $message, %args) = @_;
 
 	my $magic = $self->{HFFM_magic} = Template::Magic->new(
 		markers       => 'HTML',
@@ -60,7 +62,7 @@ sub export($@)
 	);
 
 	open my($out), ">", $args{output}
-		or $self->log(ERROR => "Cannot write to $args{output}: $!"), return;
+		or fault __x"cannot write to {out}", out => $args{output};
 
 	my $oldout = select $out;
 	$magic->print($args{input});
@@ -69,7 +71,6 @@ sub export($@)
 	close $out;
 	$self;
 }
-
 
 =method lookupTemplate \%options, $zone
 Kind of autoloader, used to discover the correct method to be invoked
@@ -82,8 +83,8 @@ sub lookupTemplate($$)
 
 	# Lookup the method to be called.
 	my $method = 'html' . ucfirst($zone->id);
-	my $prod   = $args->{producer};
-	return undef unless $prod->can($method);
+	my $prod   = $args->{producer} or panic;
+	$prod->can($method) or return undef;
 
 	# Split zone attributes into hash.  Added to %$args.
 	my $param = $zone->attributes || '';
@@ -105,14 +106,14 @@ sub lookupTemplate($$)
 our $msg_zone;  # hack
 sub containerText($)
 {	my ($self, $args) = @_;
-	my $zone = $args->{zone};
+	my $zone = $args->{zone} or panic;
 	$msg_zone = $zone if $zone->id eq 'message';  # hack
 	$zone->content;
 }
 
 sub processText($$)
 {	my ($self, $text, $args) = @_;
-	my $zone = $args->{zone};
+	my $zone = $args->{zone} or panic;
 
 	# this hack is needed to get things to work :(
 	# but this will not work in the future.
@@ -123,13 +124,13 @@ sub processText($$)
 
 sub lookup($$)
 {	my ($self, $what, $args) = @_;
-	my $zone  = $args->{zone} or confess;
+	my $zone  = $args->{zone} or panic;
 	$zone->lookup($what);
 }
 
 sub onFinalToken($)
 {	my ($self, $args) = @_;
-	my $zone = $args->{zone} or confess;
+	my $zone = $args->{zone} or panic;
 	! defined $zone->content;
 }
 

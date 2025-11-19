@@ -47,8 +47,7 @@ sub init($)
 
 	$self->SUPER::init($args) or return;
 
-	defined($self->{HFO_topic} = $args->{topic})
-		or $self->log(INTERNAL => 'No topic defined for '.ref($self)), exit 1;
+	defined($self->{HFO_topic} = $args->{topic}) or panic "No topic";
 
 	$self->{HFO_settings} = $args->{settings} || {};
 	$self;

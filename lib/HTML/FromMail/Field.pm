@@ -120,6 +120,8 @@ Produce text for a header $field containing addresses.  On $how this
 is done is defining the result.  Possible values are C<'ADDRESS'>,
 C<'PHRASE'>, C<'PLAIN'>, C<'MAILTO'>, or C<'LINK'>.  See L</address HOW>
 for details.
+
+=error don't know address field formatting '$how'.
 =cut
 
 sub addressField($$$)
@@ -152,8 +154,7 @@ sub addressField($$$)
 		return join ",<br />", @links;
 	}
 
-	$self->log(ERROR => "Don't know address field formatting '$how'");
-	'';
+	error __x"don't know address field formatting '{how}'.", how => $how;
 }
 
 =method htmlAddresses $field, \%options

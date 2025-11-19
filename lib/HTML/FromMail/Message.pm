@@ -16,8 +16,7 @@ use HTML::FromMail::Field ();
 use HTML::FromMail::Default::Previewers ();
 use HTML::FromMail::Default::HTMLifiers ();
 
-use Carp;
-use File::Basename 'basename';
+use File::Basename   qw/basename/;
 
 #--------------------
 =chapter NAME
@@ -104,7 +103,7 @@ my $attach_id = 0;
 
 sub createAttachment($$$)
 {	my ($self, $message, $part, $args) = @_;
-	my $outdir   = $args->{outdir} or confess;
+	my $outdir   = $args->{outdir} or panic;
 	my $decoded  = $part->decoded;
 
 	my $filename = $part->label('filename');
@@ -116,7 +115,7 @@ sub createAttachment($$$)
 	$decoded->write(filename => $filename)
 		or return ();
 
-	  (	url      => basename($filename),
+	 +(	url      => basename($filename),
 		size     => (-s $filename),
 		type     => $decoded->type->body,
 
@@ -151,7 +150,7 @@ or the main $message itself.
      <!--{body wrap => 30}-->
   <!--{/field}-->
 
-=warning No field name specified in $template
+=warning no field name specified in $template.
 =cut
 
 sub htmlField($$)
@@ -159,7 +158,7 @@ sub htmlField($$)
 
 	my $name  = $args->{name};
 	unless(defined $name)
-	{	$self->log(WARNING => "No field name specified in $args->{input}.");
+	{	warning __x"no field name specified in {template}.", template => $args->{input};
 		$name = "NONE";
 	}
 
@@ -209,7 +208,7 @@ sub htmlName($$)
 {	my ($self, $message, $args) = @_;
 
 	my $field = $self->lookup('field_object', $args)
-		or die "ERROR use of 'name' outside field container\n";
+		or error __x"use of 'name' outside field container.";  #XXX better message?
 
 	$self->fields->htmlName($field, $args);
 }
@@ -226,7 +225,7 @@ sub htmlBody($$)
 {	my ($self, $message, $args) = @_;
 
 	my $field = $self->lookup('field_object', $args)
-		or die "ERROR use of 'body' outside field container\n";
+		or error __x"use of 'body' outside field container";
 
 	$self->fields->htmlBody($field, $args);
 }
@@ -242,7 +241,7 @@ sub htmlAddresses($$)
 {	my ($self, $message, $args) = @_;
 
 	my $field = $self->lookup('field_object', $args)
-		or die "ERROR use of 'body' outside field container\n";
+		or error __x"use of 'addresses' outside field container";
 
 	$self->fields->htmlAddresses($field, $args);
 }
@@ -522,8 +521,8 @@ C<part> tag.
     <!--{/multipart}-->
   <!--{message}-->
 
-=error foreachPart not used within part
-=error foreachPart outside multipart
+=error foreachPart not used within part.
+=error foreachPart outside multipart.
 
 =cut
 
@@ -531,8 +530,8 @@ sub htmlForeachPart($$)
 {	my ($self, $message, $args) = @_;
 	my $part     = $self->lookup('part_object', $args) || $message;
 
-	$part or die "ERROR: foreachPart not used within part";
-	$part->isMultipart or die "ERROR: foreachPart outside multipart";
+	$part or error __x"foreachPart not used within part.";
+	$part->isMultipart or error __x"foreachPart outside multipart.";
 
 	my $parentnr = $self->lookup('part_number',$args) || '';
 	$parentnr   .= '.' if length $parentnr;
@@ -556,13 +555,14 @@ Returns the plain text of the body.
 
 sub htmlRawText($$)
 {	my ($self, $message, $args) = @_;
-	my $part     = $self->lookup('part_object', $args) || $message;
+	my $part = $self->lookup('part_object', $args) || $message;
 	$self->plain2html($part->decoded->string);
 }
 
 =method htmlPart $message|$part, \%options
 Apply the $message container of the current $part on its data.  See example
 in M<htmlForeachPart()>.
+=error part outside a 'message' block.
 =cut
 
 sub htmlPart($$)
@@ -570,7 +570,7 @@ sub htmlPart($$)
 	my $format  = $args->{formatter};
 	my $msg     = $format->lookup('message_text', $args);
 
-	defined $msg or warn("Part outside a 'message' block"), return '';
+	defined $msg or error __x"part outside a 'message' block.";
 	$format->processText($msg, $args);
 }
 

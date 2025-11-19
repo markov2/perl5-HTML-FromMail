@@ -18,7 +18,6 @@ HTML::FromMail::Page - base class for outputting pages
 
 =chapter SYNOPSIS
 
-use Log::Report 'html-frommail';
 =chapter DESCRIPTION
 
 =chapter METHODS

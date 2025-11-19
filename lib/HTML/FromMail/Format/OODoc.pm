@@ -11,7 +11,6 @@ use warnings;
 
 use Log::Report 'html-frommail';
 
-use Carp;
 use OODoc::Template ();
 
 #--------------------
@@ -69,18 +68,23 @@ sub expand($$$$)
 	$prod->$method($args->{object}, \%info);
 }
 
+=method export $message, \%options
+=fault cannot write to $out: $!
+=fault cannot open template file $in: $!
+=cut
+
 sub export($@)
-{	my ($self, %args) = @_;
+{	my ($self, $message, %args) = @_;
 
 	my $oodoc  = $self->{HFFM_oodoc} = OODoc::Template->new;
 
 	my $output = $args{output};
 	open my($out), ">", $output
-		or $self->log(ERROR => "Cannot write to $output: $!"), return;
+		or fault __x"cannot write to {out}";
 
 	my $input  = $args{input};
 	open my($in), "<", $input
-		or $self->log(ERROR => "Cannot open template file $input: $!"), return;
+		or fault __x"cannot open template file {in}", in => $input;
 
 	my $template = join '', <$in>;
 	close $in;

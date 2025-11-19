@@ -47,12 +47,12 @@ with C<urls>, C<email>, C<bold>, and C<underline>.
 
 sub htmlifyText($$$$)
 {	my ($page, $message, $part, $args) = @_;
-	my $main     = $args->{main} or confess;
+	my $main     = $args->{main} or panic;
 	my $settings = $main->settings('HTML::FromText')
 	  || +{ pre => 1, urls => 1, email => 1, bold => 1, underline => 1};
 
 	my $f = HTML::FromText->new($settings)
-		or croak "Cannot create an HTML::FromText object";
+		or panic "cannot create an HTML::FromText object";
 
 	 +{	image => '',            # this is not an image
 		html  => { text => $f->parse($part->decoded->string) },

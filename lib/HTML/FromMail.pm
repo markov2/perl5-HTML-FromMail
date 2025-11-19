@@ -129,8 +129,7 @@ Read more in L</Settings>.
 The location where the template files can be found.  It is used as
 base for relative names.
 
-=error Formatter $class can not be used: $@
-=error Formatter $class could not be instantiated
+=error formatter $class could not be instantiated.
 =cut
 
 sub init($)
@@ -142,7 +141,7 @@ sub init($)
 	my $form = $args->{formatter} || {};
 	if(!ref $form)
 	{	eval "require $form";
-		die "ERROR: Formatter $form can not be used:\n$@" if $@;
+		$@ and panic "Formatter $form can not be used:\n$@";
 		$form = $form->new;
 	}
 	elsif(ref $form eq 'HASH')
@@ -150,8 +149,8 @@ sub init($)
 		$form = HTML::FromMail::Format::OODoc->new(%$form);
 	}
 
-	die "ERROR: Formatter $form could not be instantiated\n"
-		unless defined $form;
+	defined $form
+		or error __x"formatter {class} could not be instantiated.", class => $form;
 
 	$self->{HF_formatter} = $form;
 
@@ -203,10 +202,9 @@ if that hasn't be done before.
 
   print $converter->producer($msg);
 
-=error Cannot use $producer for $class: $@
+=error cannot use $producer for $class: $@
 The specified producer (see M<new(producers)>) does not exist or produces
 compilation errors.  The problem is displayed.
-
 =cut
 
 sub producer($;$)
@@ -216,7 +214,8 @@ sub producer($;$)
 	return ($self->{HF_producer}{$class} = shift) if @_;
 	if(my $prod = $self->{HF_producer}{$class})
 	{	eval "require $prod";
-		$@ and $self->log(ERROR => "Cannot use $prod for $class:\n$@"), return undef;
+		$@ and error __x"cannot use {producer} for {class}:\n$@",
+			producer => $prod, class => $class, error => $@;
 
 		return $prod->new;
 	}
@@ -236,10 +235,9 @@ Returns the location of the templates.  When a $topic is specified,
 that is added to the templates path.  With a $producer, that is object is used
 to get the topic.
 
-=error Cannot find template file or directory $topic in $directory.
+=error cannot find template file or directory $topic in $directory.
 The templates directory (see M<new(templates)>) does not contain a template
 for the specified topic (see M<HTML::FromMail::Object::new(topic)>).
-
 =cut
 
 sub templates(;$)
@@ -255,8 +253,8 @@ sub templates(;$)
 	my $dirname  = catdir $templates, $topic;
 	return $dirname if -d $dirname;
 
-	$self->log(ERROR => "Cannot find template file or directory '$topic' in '$templates'.\n");
-	undef;
+	error __x"cannot find template file or directory '{topic}' in '{directory}'.",
+		topic => $topic, directory => $templates;
 }
 
 =method settings ($producer|$topic), [HASH|LIST]
@@ -300,21 +298,21 @@ The $directory where the processed templates for the object are written
 to.  It is only permitted to supply a single $filename when the template
 specifies a single filename as well.
 
-=error   No producer for $class objects.
-=error   No output directory or file specified.
-=warning No templates for $topic objects.
-=warning No templates found in $templates directory
-
+=error   no producer for $class objects.
+=error   no output directory or file specified.
+=warning no templates for $topic objects.
+=warning no templates found in $dir directory.
+=warning no template file $file.
 =cut
 
 sub export($@)
 {	my ($self, $object, %args) = @_;
 
 	my $producer  = $self->producer($object)
-		or $self->log(ERROR => "No producer for ",ref($object), " objects."), return;
+		or error __x"no producer for {class} objects.", class => ref $object;
 
 	my $output    = $args{output}
-		or $self->log(ERROR => "No output directory or file specified."), return;
+		or error __x"no output directory or file specified.";
 
 # this cannot be right when $output isa filename?
 #   $self->log(ERROR => "Cannot create output directory $output: $!"), return
@@ -328,18 +326,17 @@ sub export($@)
 
 		foreach my $in (ref $input ? @$input : $input)
 		{	my $fn = file_name_is_absolute($in) ? $in : catfile($templates, $in);
-
-			-f $fn or $self->log(WARNING => "No template file $fn"), next;
+			-f $fn or warning(__x"no template file {file}.", file => $fn), next;
 
 			push @files, $fn;
 		}
 	}
 	else
 	{	my $templates = $self->templates($topic)
-			or $self->log(WARNING => "No templates for $topic objects."), return;
+			or warning(__x"no templates for {topic} objects.", topic => $topic), return;
 
 		@files = $self->expandFiles($templates);
-		@files or $self->log(WARNING => "No templates found in $templates directory.");
+		@files or warning __x"no templates found in {dir} directory.", dir => $templates;
 	}
 
 	my $formatter = $self->formatter(settings => $self->{HF_settings});
@@ -367,9 +364,9 @@ Returns a LIST with all filenames which are included in the $directory
 specified or the ARRAY.  If only one $file is specified, then that
 will be returned.
 
-=warning Cannot find $dir/file
-=error   Cannot read from directory $thing: $!
-=warning Skipping $full, which is neither file or directory.
+=warning cannot find directory {dir}.
+=fault   cannot read from directory {dir}: $!
+=warning skipping {name}, which is neither file or directory.
 =cut
 
 sub expandFiles($)
@@ -378,10 +375,10 @@ sub expandFiles($)
 	return $thing  if -f $thing;
 
 	-d $thing
-		or $self->log(WARNING => "Cannot find $thing"), return ();
+		or warning(__x"cannot find directory {dir}.", dir => $thing), return ();
 
 	opendir DIR, $thing
-		or $self->log(ERROR => "Cannot read from directory $thing: $!"), return ();
+		or fault __x"cannot read from directory {dir}", dir => $thing;
 
 	my @files;
 	while(my $item = readdir DIR)
@@ -399,7 +396,7 @@ sub expandFiles($)
 			next;
 		}
 
-		$self->log(WARNING => "Skipping $full, which is neither file or directory.");
+		warning __x"skipping {name}, which is neither file or directory.", name => $full;
 	}
 
 	closedir DIR;
