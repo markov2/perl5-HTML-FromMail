@@ -36,26 +36,26 @@ must define either
   image => {}, html => ''     # an image is produced, or
   image => '', html => {}     # html was produced
 
-Each of the functions is called with five arguments: PAGE, MESSAGE,
-PART, ATTACH, and ARGS argument.  The PAGE is the object which produces pages,
-an extension of HTML::FromMail::Page.  The MESSAGE is the main message
-which is displayed (a Mail::Message object).  The PART is either
-the whole MESSAGE or a part within a multipart or nested message (a
-Mail::Message::Part object).  The PART information is to be processed.
+Each of the functions is called with five arguments: C<$page>, C<$message>,
+C<$part>, C<\%attach>, and C<\%options>.
+The C<$page> is the object which produces pages,
+an extension of HTML::FromMail::Page.  The C<$message> is the main message
+which is displayed (a Mail::Message object).  The C<$part> is either
+the whole C<$message> or a part within a multipart or nested message (a
+Mail::Message::Part object).  The C<$part> information is to be processed.
 
-As ATTACH, a reference to a hash with information about the created
+As C<\%attach>, a reference to a HASH with information about the created
 attachement is passed. This information is needed to produce the preview.
 That same hash is extended with more information from the previewer, and
 then accessible via the formatter.
 
-The ARGS is a wild combination of information about the formatter
+The C<\%options> is a wild combination of information about the formatter
 and information defined by it.  For instance, the arguments which are
 passed with the tag in the template file can be found in there.  Print the
 content of the hash to see how much information you get... (sorry for this
 rough description)
 
 =chapter FUNCTIONS
-
 =cut
 
 our @previewers = (

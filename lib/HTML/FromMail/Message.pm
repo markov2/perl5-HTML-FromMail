@@ -31,6 +31,8 @@ work.  Best take a look at the examples directory.
 
 =chapter METHODS
 
+=section Constructors
+
 =c_method new %options
 =default topic C<'message'>
 =cut
@@ -65,6 +67,25 @@ sub init($)
 	$self;
 }
 
+#-----------
+=section Attributes
+
+=method fields
+Returns the field text producing object.
+=cut
+
+sub fields() { $_[0]->{HFM_field} }
+
+=method header
+Returns the header text producting object.
+=cut
+
+sub header() { $_[0]->{HFM_head} }
+
+#-----------
+=section Other methods
+=cut
+
 =method createAttachment $message, $part, \%options
 Create an attachment file, and return a HASH with information about
 that file.  Returns undef if creation fails.
@@ -93,26 +114,14 @@ sub createAttachment($$$)
 	$decoded->write(filename => $filename)
 		or return ();
 
-	(	url      => basename($filename),
+	  (	url      => basename($filename),
 		size     => (-s $filename),
 		type     => $decoded->type->body,
 
 		filename => $filename,    # absolute
 		decoded  => $decoded,
-	);
+	  );
 }
-
-=method fields
-Returns the field text producing object.
-=cut
-
-sub fields() { $_[0]->{HFM_field} }
-
-=method header
-Returns the header text producting object.
-=cut
-
-sub header() { $_[0]->{HFM_head} }
 
 =method htmlField $message, \%options
 Returns the field definition for the currently active message part. When
@@ -126,7 +135,7 @@ captured to be used later.
 =option  decode BOOLEAN
 =default decode true if possible
 
-=option  from 'PART'|'PARENT'|$message
+=option  from 'PART'|'PARENT'|'MESSAGE'
 =default from 'PART'
 The source of this field: the currently active 'PART' (which may be the
 main message), the 'PARENT' of the active part (defaults to the message),

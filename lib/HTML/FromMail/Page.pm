@@ -20,9 +20,17 @@ HTML::FromMail::Page - base class for outputting pages
 
 =chapter METHODS
 
-=c_method new OPTIONS
+=section Constructors
 
+=c_method new %options
 =cut
+
+#-----------
+=section Attributes
+=cut
+
+#-----------
+=section Other methods
 
 =method lookup $label, \%options
 Look-up, in a formatter dependent way, what the value related to a certain
@@ -31,7 +39,7 @@ method is called is stored somewhere in the OPTIONS.  The formatter
 (which is also in the %options) is called to get the value based on that
 location information.
 
-=requires formatter OBJECT
+=requires formatter $object
 =cut
 
 sub lookup($$)

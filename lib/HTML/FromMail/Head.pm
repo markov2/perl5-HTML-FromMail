@@ -9,7 +9,7 @@ use base 'HTML::FromMail::Page';
 use strict;
 use warnings;
 
-use HTML::FromMail::Field;
+use HTML::FromMail::Field  ();
 
 #--------------------
 =chapter NAME
@@ -22,10 +22,10 @@ HTML::FromMail::Head - output a message header as HTML
 
 =chapter METHODS
 
-=c_method new OPTIONS
+=section Constructors
 
+=c_method new %options
 =default topic C<'head'>
-
 =cut
 
 sub init($)
@@ -35,6 +35,14 @@ sub init($)
 	$self->SUPER::init($args) or return;
 	$self;
 }
+
+#-----------
+=section Attributes
+=cut
+
+#-----------
+=section Other methods
+=cut
 
 =ci_method fields $message, %options
 Collect information about the header fields.

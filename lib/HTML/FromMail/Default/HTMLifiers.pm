@@ -29,17 +29,17 @@ our @htmlifiers = (
 #	'text/html'  => \&htmlifyHtml,
 );
 
-=function htmlifyText PAGE, MESSAGE, PART, ARGS
+=function htmlifyText $page, $message, $part, \%options
 Convert plain text into HTML using HTML::FromText.  Configuration
 can be supplied as show in the example.  The defaults are set to mode C<pre>
 with C<urls>, C<email>, C<bold>, and C<underline>.
 
 =example configuring text conversion
   my $f = HTML::FromMail->new(
-    settings =>
-      { message        => { disposition => \&my_disposer },
-        HTML::FromText => { block_code  => 0 },
-      },
+    settings => {
+       message        => { disposition => \&my_disposer },
+       HTML::FromText => { block_code  => 0 },
+    },
   );
 
 =cut
@@ -58,7 +58,7 @@ sub htmlifyText($$$$)
 	}
 }
 
-=function htmlifyHtml PAGE, MESSAGE, PART, ARGS
+=function htmlifyHtml $page, $message, $part, \%options
 THIS FUNCTION IS NOT PRESENT, for the following reason.  What should
 happen here?  The message part/multipart contains an html message, but
 that interferes with the HTML of the template.

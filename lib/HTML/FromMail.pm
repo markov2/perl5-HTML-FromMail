@@ -25,8 +25,8 @@ HTML::FromMail - base-class for the HTML producers
 
 =chapter SYNOPSIS
 
-  use Mail::Message;   # part of Mail::Box
-  use HTML::FromMail;
+  use Mail::Message  ();
+  use HTML::FromMail ();
 
   my $msg    = Mail::Message->read(\*STDIN);
   my $fmt    = HTML::FromMail->new(templates => 'templ');
@@ -36,7 +36,7 @@ HTML::FromMail - base-class for the HTML producers
 
 =chapter DESCRIPTION
 
-This module, HTML::FromMail, is designed to put e-mail related data
+This module is designed to put e-mail related data
 on web-pages.  This could be used to create web-mail clients.
 
 =section Status
@@ -114,12 +114,12 @@ links external class names (usually implemented in M<Mail::Box>) to
 sub-classes of this object.  You may modify the default list
 using M<producer()>.  Read more in L</Producers>.
 
-=option  settings HASH
-=default settings {}
+=option  settings \%map
+=default settings +{}
 Each producer has defaults for formatting flexability.  For instance,
 sometimes alternatives are available for creating certain pieces
 of HTML.  This option adds/modifies the settings for a certain group
-of producers, but influence the formatters behavior as well.
+of producers, but influences the formatters their behavior as well.
 Read more in L</Settings>.
 
 =option  templates  $directory
@@ -179,6 +179,10 @@ Returns the selected formatter object.
 =cut
 
 sub formatter() { $_[0]->{HF_formatter} }
+
+#-----------
+=section Other methods
+=cut
 
 =method producer (CLASS|$object), [$producer]
 The CLASS object, for instance a Mail::Message, is handled by the HTML
@@ -271,9 +275,6 @@ sub settings($;@)
 	$self->{HF_settings}{$topic} = @_ == 1 ? shift : +{ @_ };
 }
 
-#--------------------
-=section Export
-
 =method export $object, %options
 Produce the HTML output of the $object.
 
@@ -358,9 +359,6 @@ sub export($@)
 
 	$outfiles[0];
 }
-
-#--------------------
-=section Other methods
 
 =method expandFiles $directory|$file|\@files
 Returns a LIST with all filenames which are included in the $directory

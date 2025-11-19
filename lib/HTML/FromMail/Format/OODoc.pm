@@ -32,14 +32,39 @@ in larger HTML structures.
 
 =chapter METHODS
 
-=c_method new OPTIONS
+=section Constructors
 
+=c_method new %options
 =cut
 
-sub init($)
-{	my ($self, $args) = @_;
-	$self->SUPER::init($args) or return;
-	$self;
+#-----------
+=section Attributes
+
+=method oodoc
+Returns the L<OODoc::Template> object which is used.
+=cut
+
+sub oodoc() { $_[0]->{HFFM_oodoc} }
+
+#-----------
+=section Other methods
+
+=method expand \%options, $tag, \%attrs, \$text
+Kind of autoloader, used to discover the correct method to be invoked
+when a pattern must be filled-in.
+=cut
+
+sub expand($$$$)
+{	my ($self, $args, $tag, $attrs, $textref) = @_;
+
+	# Lookup the method to be called.
+	my $method = 'html' . ucfirst($tag);
+	my $prod   = $args->{producer};
+
+	$prod->can($method) or return undef;
+
+	my %info  = (%$args, %$attrs, textref => $textref);
+	$prod->$method($args->{object}, \%info);
 }
 
 sub export($@)
@@ -68,31 +93,6 @@ sub export($@)
 
 	close $out;
 	$self;
-}
-
-=method oodoc
-Returns the L<OODoc::Template> object which is used.
-=cut
-
-sub oodoc() { $_[0]->{HFFM_oodoc} }
-
-=method expand ARGS, TAG, ATTRS, TEXTREF
-Kind of autoloader, used to discover the correct method to be invoked
-when a pattern must be filled-in.
-
-=cut
-
-sub expand($$$)
-{	my ($self, $args, $tag, $attrs, $textref) = @_;
-
-	# Lookup the method to be called.
-	my $method = 'html' . ucfirst($tag);
-	my $prod   = $args->{producer};
-
-	$prod->can($method) or return undef;
-
-	my %info  = (%$args, %$attrs, textref => $textref);
-	$prod->$method($args->{object}, \%info);
 }
 
 sub containerText($)

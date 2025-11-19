@@ -22,6 +22,8 @@ HTML::FromMail::Field - output a header field as HTML
 
 =chapter METHODS
 
+=section Constructors
+
 =c_method new %options
 =default topic C<'field'>
 =cut
@@ -34,7 +36,14 @@ sub init($)
 	$self;
 }
 
-=method fromHead $head, $name, \%args
+#-----------
+=section Attributes
+=cut
+
+#-----------
+=section Other methods
+
+=method fromHead $head, $name, \%options
 Returns the fields from the header with $name.  Some fields appear
 more than once, some may not be present.
 =cut
@@ -77,7 +86,7 @@ L</content HOW>
 In combination with C<content REFOLD>, it specifies the maximum number
 of characters requested per line.  See L</wrap INTEGER>.
 
-=option  address ADDRESS|PHRASE|PLAIN|MAILTO|LINK
+=option  address 'ADDRESS'|'PHRASE'|'PLAIN'|'MAILTO'|'LINK'
 =default address C<'MAILTO'>
 See L</address HOW>
 =cut
@@ -104,7 +113,7 @@ sub htmlBody($$$)
 	$self->plain2html($field->foldedBody);
 }
 
-=method addressField $field, $how, ARGS
+=method addressField $field, $how, \%options
 Produce text for a header $field containing addresses.  On $how this
 is done is defining the result.  Possible values are C<'ADDRESS'>,
 C<'PHRASE'>, C<'PLAIN'>, C<'MAILTO'>, or C<'LINK'>.  See L</address HOW>
@@ -226,17 +235,17 @@ under the address.  The C<'MAILTO'> is probably easier to understand.
 Defined HOW field bodies are handled, by default UNFOLDED.
 Valid values are
 =over 4
-=item  C<'FOLDED'>
+=item * C<'FOLDED'>
 Included the content FOLDED as found in the source message.  This is the
 fastest choice, and usually in a preformatted html block, otherwise the
 folding will be lost again.
-=item C<'REFOLD'>
+=item * C<'REFOLD'>
 Do not accept the folding as found in the message headers, but force it
 into the wrap which is defined by C<wrap>.
-=item C<'UNFOLDED'>
+=item * C<'UNFOLDED'>
 All line folding is removed from the field.  This useful when the field body
 is displayed in a proportional font.
-=item C<'DECODED'>
+=item * C<'DECODED'>
 Fields may be character-set encoded.  Decoding these fields is nicest,
 but consumes considerable time.
 =back
