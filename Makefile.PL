@@ -23,6 +23,7 @@ my %oodist   = (
 	parser   => {
 		syntax         => 'markov',
 		skip_links     => [
+			'Template::Magic',
 		],
 		pmhead         => undef,
 	},
@@ -50,9 +51,10 @@ my %requires = (
 	'OODoc::Template'  => 0.01,  # default template system
 );
 
+# See README.md for uses
 my %optional = (
-	'Template::Magic'   => '1.02',
-	'Image::Magick'     => '5.0',
+	'Template::Magic'  => '1.02',
+	'Image::Magick'    => '5.0',
 );
 
 WriteMakefile

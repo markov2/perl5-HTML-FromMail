@@ -24,12 +24,12 @@ You may wish to install with following extras:
    cpan -i Template::Magic Image::Magick HTML::From-Mail
 ```
 
-### Template::Magic
+### optional Template::Magic
 
 Required if you want to use the Template::Magic formatter, which is not
 required to run the examples.
 
-### Image::Magick
+### optional Image::Magick
 
 When messages contain images, these images can be shown as small
 previews.  This is done with Image::Magick, which is quite hard to

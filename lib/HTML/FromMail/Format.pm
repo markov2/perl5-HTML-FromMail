@@ -35,15 +35,15 @@ At the moment, the following template systems are available:
 
 =over 4
 =item * HTML::FromMail::Format::OODoc
-Based on L<OODoc::Template>, a simplified version of Template::Magic. It
+Based on OODoc::Template, a simplified version of Template::Magic. It
 has all the basic needs of a template system, but may get slow for large
 template files.
 
 =item * HTML::FromMail::Format::Magic
-Based on L<Template::Magic>, created by Domizio Demichelis.
-You will have to install Bundle::MagicTemplate before you can use this
-formatter.  The default system is compatible with the previous formatter,
-so you can easily upgrade.
+Based on Template::Magic, created by Domizio Demichelis.  You will
+have to install that optional module before you can use this formatter.
+The default system is compatible with the previous formatter, so you
+can easily upgrade.
 
 The formatter has nice simplifications for the user, especially
 when a lot own data must be included in the templates: so data with or
