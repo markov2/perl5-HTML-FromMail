@@ -31,15 +31,23 @@ in larger HTML structures.
 
 =chapter METHODS
 
-=c_method new OPTIONS
+=section Constructors
 
+=c_method new %options
 =cut
 
-sub init($)
-{	my ($self, $args) = @_;
-	$self->SUPER::init($args) or return;
-	$self;
-}
+#-----------
+=section Attributes
+
+=method magic
+Returns the Template::Magic object which is used.
+=cut
+
+sub magic() { $_[0]->{HFFM_magic} }
+
+#-----------
+=section Other methods
+=cut
 
 sub export($@)
 {	my ($self, %args) = @_;
@@ -61,16 +69,10 @@ sub export($@)
 }
 
 
-=method magic
-Returns the L<Template::Magic> object which is used.
-=cut
-
-sub magic() { $_[0]->{HFFM_magic} }
-
-=method lookupTemplate ARGS, ZONE
+=method lookupTemplate \%options, $zone
 Kind of autoloader, used to discover the correct method to be invoked
 when a pattern must be filled-in.
-ZONE is the found L<Template::Magic::Zone> information.
+The $zone is the found Template::Magic::Zone information.
 =cut
 
 sub lookupTemplate($$)

@@ -20,6 +20,8 @@ HTML::FromMail::Object - base-class for convertable items
 
 =chapter METHODS
 
+=section Constructors
+
 =c_method new %options
 
 =requires topic STRING
@@ -74,8 +76,6 @@ sub settings(;$)
 }
 
 #--------------------
-=section Export
-
 =section Other methods
 
 =method plain2html STRING

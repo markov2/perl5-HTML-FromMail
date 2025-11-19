@@ -54,16 +54,20 @@ without relation to messages which is not provided by this distribution
 
 =chapter METHODS
 
-=c_method new OPTIONS
+=section Constructors
+
+=c_method new %options
 =cut
 
-sub init($)
-{	my ($self, $args) = @_;
-	$self->SUPER::init($args) or return;
-	$self;
-}
+#-----------
+=section Attributes
+=cut
 
-=method containerText ARGS
+#-----------
+=section Other methods
+=cut
+
+=method containerText \%options
 Produces the text encapsulated between begin and end tag of this
 template block.  If the tag is "stand alone", not a container, the
 value of undef is returned.  When the container is "empty", an
@@ -72,15 +76,15 @@ value of undef is returned.  When the container is "empty", an
 
 sub containerText($) { $_[0]->notImplemented }
 
-=method processText TEXT, ARGS
-New TEXT is supplied, which can be seen as part of the currently active
-container.
+=method processText $template, \%options
+A new $template is supplied, which can be seen as part of the currently
+active container.
 =cut
 
 sub processText($$) { $_[0]->notImplemented }
 
-=method lookup TAG, ARGS
-Lookup the value for a certain TAG.  This TAG may, but also may not,
+=method lookup $tag, \%options
+Lookup the value for a certain $tag.  This $tag may, but also may not,
 be derived from the template.  The value is lookup is the data produced
 by the various producer methods, implemented in HTML::FromMail::Page
 extensions.  The values are administered by the various formatters,
@@ -90,7 +94,7 @@ dependent.  Values which are looked-up are often not simple strings.
 
 sub lookup($$) { $_[0]->notImplemented }
 
-=method onFinalToken ARGS
+=method onFinalToken \%options
 Returns whether the parser has more data in this particular part of
 the template.
 =cut
