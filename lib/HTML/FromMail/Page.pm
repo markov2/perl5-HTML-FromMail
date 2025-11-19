@@ -9,6 +9,8 @@ use base 'HTML::FromMail::Object';
 use strict;
 use warnings;
 
+use Log::Report 'html-frommail';
+
 #--------------------
 =chapter NAME
 
@@ -16,6 +18,7 @@ HTML::FromMail::Page - base class for outputting pages
 
 =chapter SYNOPSIS
 
+use Log::Report 'html-frommail';
 =chapter DESCRIPTION
 
 =chapter METHODS

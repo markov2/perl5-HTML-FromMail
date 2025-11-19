@@ -9,6 +9,8 @@ use base 'HTML::FromMail::Page';
 use strict;
 use warnings;
 
+use Log::Report 'html-frommail';
+
 use HTML::FromMail::Field  ();
 
 #--------------------

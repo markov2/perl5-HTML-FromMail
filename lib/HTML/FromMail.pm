@@ -9,8 +9,10 @@ use base 'Mail::Reporter';
 use strict;
 use warnings;
 
-use File::Spec::Functions;
-use File::Basename qw/basename dirname/;
+use Log::Report 'html-frommail';
+
+use File::Spec::Functions qw/catfile catdir file_name_is_absolute/;
+use File::Basename        qw/basename dirname/;
 
 my %default_producers = ( # classes will be compiled automatically when used
 	'Mail::Message'        => 'HTML::FromMail::Message',
@@ -244,13 +246,13 @@ sub templates(;$)
 {	my $self = shift;
 	return $self->{HF_templates} unless @_;
 
-	my $topic    = ref $_[0] ? shift->topic : shift;
+	my $topic    = blessed $_[0] ? shift->topic : shift;
 	my $templates= $self->{HF_templates};
 
-	my $filename = catfile($templates, $topic);
+	my $filename = catfile $templates, $topic;
 	return $filename if -f $filename;
 
-	my $dirname  = catdir($templates, $topic);
+	my $dirname  = catdir $templates, $topic;
 	return $dirname if -d $dirname;
 
 	$self->log(ERROR => "Cannot find template file or directory '$topic' in '$templates'.\n");
@@ -269,7 +271,7 @@ the content of your templates.
 
 sub settings($;@)
 {	my $self  = shift;
-	my $topic = ref $_[0] ? shift->topic : shift;
+	my $topic = blessed $_[0] ? shift->topic : shift;
 	@_ or return $self->{HF_settings}{$topic};
 
 	$self->{HF_settings}{$topic} = @_ == 1 ? shift : +{ @_ };
@@ -345,7 +347,7 @@ sub export($@)
 
 	foreach my $infile (@files)
 	{	my $basename = basename $infile;
-		my $outfile  = catfile($output, $basename);
+		my $outfile  = catfile $output, $basename;
 		push @outfiles, $outfile;
 
 		$formatter->export(

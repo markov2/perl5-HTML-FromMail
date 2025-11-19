@@ -9,6 +9,8 @@ use base 'HTML::FromMail::Page';
 use strict;
 use warnings;
 
+use Log::Report 'html-frommail';
+
 use HTML::FromMail::Head  ();
 use HTML::FromMail::Field ();
 use HTML::FromMail::Default::Previewers ();

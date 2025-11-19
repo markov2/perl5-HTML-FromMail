@@ -9,6 +9,8 @@ use base 'HTML::FromMail::Format';
 use strict;
 use warnings;
 
+use Log::Report 'html-frommail';
+
 use Carp;
 
 BEGIN

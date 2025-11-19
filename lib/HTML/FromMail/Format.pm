@@ -9,6 +9,8 @@ use base 'Mail::Reporter';
 use strict;
 use warnings;
 
+use Log::Report 'html-frommail';
+
 #--------------------
 =chapter NAME
 

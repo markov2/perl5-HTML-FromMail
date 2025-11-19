@@ -8,8 +8,9 @@ package HTML::FromMail::Default::HTMLifiers;
 use strict;
 use warnings;
 
-use HTML::FromText;
-use Carp;
+use Log::Report 'html-frommail';
+
+use HTML::FromText ();
 
 #--------------------
 =chapter NAME
@@ -53,9 +54,9 @@ sub htmlifyText($$$$)
 	my $f = HTML::FromText->new($settings)
 		or croak "Cannot create an HTML::FromText object";
 
-	{	image => '',            # this is not an image
+	 +{	image => '',            # this is not an image
 		html  => { text => $f->parse($part->decoded->string) },
-	}
+	  };
 }
 
 =function htmlifyHtml $page, $message, $part, \%options

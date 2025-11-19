@@ -9,7 +9,9 @@ use base 'HTML::FromMail::Page';
 use strict;
 use warnings;
 
-use Mail::Message::Field::Full;
+use Log::Report 'html-frommail';
+
+use Mail::Message::Field::Full ();
 
 #--------------------
 =chapter NAME
