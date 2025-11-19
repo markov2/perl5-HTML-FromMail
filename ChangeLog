@@ -4,6 +4,15 @@
 Unless noted otherwise, these changes where initiated and applied by
 Mark Overmeer.
 
+version 4.00:
+
+	Changes:
+	- use Mail::Box 4 exception model.
+
+#!!! Mail::Box 3 compatibility is still maintained on github in branch
+#!!! maint3, and published.  So: you may find newer versions with major
+#!!! number 3.  Use (at least) version 4 for new developments.
+
 version 3.00: Wed 19 Nov 12:09:30 CET 2025
 
 	Changes:
