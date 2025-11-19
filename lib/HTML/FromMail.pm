@@ -332,7 +332,7 @@ sub export($@)
 		}
 	}
 	else
-	{	my $templates = $self->templates($topic);
+	{	my $templates = $self->templates($topic)
 			or $self->log(WARNING => "No templates for $topic objects."), return;
 
 		@files = $self->expandFiles($templates);

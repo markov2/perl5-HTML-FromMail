@@ -2,13 +2,10 @@ ChangeLog
 MANIFEST
 Makefile.PL
 README.md
-examples
 examples/README
 examples/demo.pl
 examples/show_all.pl
-examples/templ_all/message
 examples/templ_all/message/index.html
-examples/templ_demo/message
 examples/templ_demo/message/details.html
 examples/templ_demo/message/index.html
 examples/templ_demo/message/reply.html

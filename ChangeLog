@@ -6,6 +6,9 @@ Mark Overmeer.
 
 version 3.00:
 
+	Changes:
+	- removed interactive selection of optional modules.
+
 	Improvements:
 	- small doc-fixes.
 	- add .gitignore
