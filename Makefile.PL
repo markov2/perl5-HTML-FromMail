@@ -4,7 +4,7 @@ require 5.016;
 
 use IO::Handle;
 
-my $version  = '0.13';
+my $version  = '3.00';
 my $git      = "https://github.com/markov2/perl5-HTML-FromMail";
 my $publish  = "../public_html/html-frommail";
 my $homepage = "http://perl.overmeer.net/CPAN/";
