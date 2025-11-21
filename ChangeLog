@@ -9,6 +9,10 @@ version 4.00:
 	Changes:
 	- use Mail::Box 4 exception model: use Log::Report
 
+	Fixes:
+	- fix test when Template::Magic is not installed.
+	  gituhub issue #1, cpantesters [Slaven Rezic]
+
 	Improvements:
 	- method documentation reorganization.
 	- Carp/die to Log::Report
