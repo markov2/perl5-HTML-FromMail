@@ -10,7 +10,7 @@ use strict;
 use warnings;
 
 use Carp;
-use OODoc::Template;
+use OODoc::Template    ();
 
 #--------------------
 =chapter NAME
@@ -25,7 +25,6 @@ HTML::FromMail::Format::OODoc - convert messages into HTML using OODoc::Template
   );
 
 =chapter DESCRIPTION
-
 Convert messages into HTML using L<OODoc::Template>.  This is a simple
 template system, which focusses on giving produced pieces of HTML a place
 in larger HTML structures.

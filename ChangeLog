@@ -13,6 +13,10 @@ version 3.01:
 	Changes:
 	- maintenance release with Mail::Box version 3 compatibility.
 
+	Fixes:
+	- fix test when Template::Magic is not installed.
+	  gituhub issue #1, cpantesters [Slaven Rezic]
+
 	Improvements:
 	- organization of methods.
 	- remove Bundle::TemplateMagic references
