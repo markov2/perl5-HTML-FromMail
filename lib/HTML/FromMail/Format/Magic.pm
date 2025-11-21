@@ -13,7 +13,7 @@ use Carp;
 
 BEGIN
 {	eval { require Template::Magic };
-	$@ and die "Install Bundle::Template::Magic for this formatter\n";
+	$@ and die "Install Template::Magic for this formatter\n";
 }
 
 #--------------------
