@@ -42,7 +42,6 @@ See M<HTML::FromMail::new(settings)>.
 
 sub init($)
 {	my ($self, $args) = @_;
-
 	$self->SUPER::init($args) or return;
 
 	defined($self->{HFO_topic} = $args->{topic})

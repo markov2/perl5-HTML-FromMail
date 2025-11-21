@@ -4,9 +4,10 @@
 Unless noted otherwise, these changes where initiated and applied by
 Mark Overmeer.
 
-#!!! This is the maintenance version of this module.  When you
-#!!! start fresh, go for version 4 (or higher).
-#!!! On github, this code is branch 'maint3'
+#!!! This is the maintenance version of this module.  When you start fresh,
+#!!! go for version 4 (or higher).  On github, this code is branch 'maint3'
+#!!! Convert? See F<https://https://github.com/markov2/perl5-Mail-Box/wiki/>
+
 
 version 3.01:
 

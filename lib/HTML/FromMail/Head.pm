@@ -31,9 +31,7 @@ HTML::FromMail::Head - output a message header as HTML
 sub init($)
 {	my ($self, $args) = @_;
 	$args->{topic} ||= 'head';
-
-	$self->SUPER::init($args) or return;
-	$self;
+	$self->SUPER::init($args);
 }
 
 #-----------

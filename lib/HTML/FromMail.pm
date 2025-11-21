@@ -36,8 +36,12 @@ HTML::FromMail - base-class for the HTML producers
 
 =chapter DESCRIPTION
 
-This module is designed to put e-mail related data
-on web-pages.  This could be used to create web-mail clients.
+This module is designed to put e-mail related data on web-pages.
+This could be used to create web-mail clients.
+
+B<This is a maintenance release for the old interface>.  Read
+F<https://https://github.com/markov2/perl5-Mail-Box/wiki/> how
+to move to towards version 4.
 
 =section Status
 =over 4
@@ -133,7 +137,6 @@ base for relative names.
 
 sub init($)
 {	my ($self, $args) = @_;
-
 	$self->SUPER::init($args) or return;
 
 	# Defining the formatter to be used

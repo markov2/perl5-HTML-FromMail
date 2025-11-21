@@ -31,9 +31,7 @@ HTML::FromMail::Field - output a header field as HTML
 sub init($)
 {	my ($self, $args) = @_;
 	$args->{topic} ||= 'field';
-
-	$self->SUPER::init($args) or return;
-	$self;
+	$self->SUPER::init($args);
 }
 
 #-----------

@@ -40,7 +40,6 @@ work.  Best take a look at the examples directory.
 sub init($)
 {	my ($self, $args) = @_;
 	$args->{topic} ||= 'message';
-
 	$self->SUPER::init($args) or return;
 
 	$self->{HFM_dispose}  = $args->{disposition};
