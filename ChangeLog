@@ -8,8 +8,9 @@ Mark Overmeer.
 #!!! go for version 4 (or higher).  On github, this code is branch 'maint3'
 #!!! Convert? See F<https://https://github.com/markov2/perl5-Mail-Box/wiki/>
 
+version 3.02:
 
-version 3.01:
+version 3.01: Fri 21 Nov 13:49:38 CET 2025
 
 	Changes:
 	- maintenance release with Mail::Box version 3 compatibility.
