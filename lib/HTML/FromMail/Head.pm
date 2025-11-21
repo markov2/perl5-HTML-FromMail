@@ -42,7 +42,6 @@ sub init($)
 
 #-----------
 =section Other methods
-=cut
 
 =ci_method fields $message, %options
 Collect information about the header fields.

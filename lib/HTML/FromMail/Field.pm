@@ -33,9 +33,7 @@ HTML::FromMail::Field - output a header field as HTML
 sub init($)
 {	my ($self, $args) = @_;
 	$args->{topic} ||= 'field';
-
-	$self->SUPER::init($args) or return;
-	$self;
+	$self->SUPER::init($args);
 }
 
 #-----------
@@ -97,12 +95,11 @@ sub htmlBody($$$)
 {	my ($self, $field, $args) = @_;
 
 	my $settings = $self->settings;
-
-	my $wrap    = $args->{wrap} || $settings->{wrap};
-	my $content = $args->{content} || $settings->{content} || (defined $wrap && 'REFOLD') || 'DECODED';
+	my $wrap     = $args->{wrap} || $settings->{wrap};
+	my $content  = $args->{content} || $settings->{content} || (defined $wrap && 'REFOLD') || 'DECODED';
 
 	if($field->isa('Mail::Message::Field::Addresses'))
-	{	my $how = $args->{address} || $settings->{address} || 'MAILTO';
+	{	my $how  = $args->{address} || $settings->{address} || 'MAILTO';
 		$how eq 'PLAIN' or return $self->addressField($field, $how, $args)
 	}
 

@@ -46,10 +46,10 @@ my %oodist   = (
 );
 
 my %requires = (
-	'Mail::Box'        => 4.0,
-	'HTML::FromText'   => 2.03,
-	'OODoc::Template'  => 0.19,  # default template system
-	'Log::Report'      => 1.42,
+	'Mail::Box'        => '4.00',
+	'HTML::FromText'   => '2.03',
+	'OODoc::Template'  => '0.19',  # default template system
+	'Log::Report'      => '1.42',
 );
 
 # See README.md for uses

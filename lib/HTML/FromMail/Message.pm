@@ -41,8 +41,7 @@ work.  Best take a look at the examples directory.
 sub init($)
 {	my ($self, $args) = @_;
 	$args->{topic} ||= 'message';
-
-	$self->SUPER::init($args) or return;
+	$self->SUPER::init($args);
 
 	$self->{HFM_dispose}  = $args->{disposition};
 	my $settings = $self->settings;
@@ -112,8 +111,7 @@ sub createAttachment($$$)
 		$part->label(filename => $filename);
 	}
 
-	$decoded->write(filename => $filename)
-		or return ();
+	$decoded->write(filename => $filename);
 
 	 +(	url      => basename($filename),
 		size     => (-s $filename),
@@ -418,8 +416,6 @@ sub htmlInline($$)
 	$dispose eq 'inline' or return '';
 
 	my @attach  = $self->createAttachment($message, $current, $args);
-	@attach or return "Could not create attachment";
-
 	my $inliner = $self->htmlifier($current->body->mimeType);
 	my $inline  = $inliner->($self, $message, $current, $args);
 
@@ -446,8 +442,6 @@ sub htmlAttach($$)
 	$dispose eq 'attach' or return '';
 
 	my %attach  = $self->createAttachment($message, $current, $args);
-	keys %attach or return "Could not create attachment";
-
 	\%attach;
 }
 
@@ -489,13 +483,11 @@ C<smallwidth>, C<smallheight>, C<width>, and C<height>.
 sub htmlPreview($$)
 {	my ($self, $message, $args) = @_;
 
-	my $current = $self->lookup('part_object', $args) || $message;
-	my $dispose = $self->disposition($message, $current, $args);
+	my $current   = $self->lookup('part_object', $args) || $message;
+	my $dispose   = $self->disposition($message, $current, $args);
 	$dispose eq 'preview' or return '';
 
-	my %attach  = $self->createAttachment($message, $current, $args);
-	keys %attach or return "Could not create attachment";
-
+	my %attach    = $self->createAttachment($message, $current, $args);
 	my $previewer = $self->previewer($current->body->mimeType);
 	$previewer->($self, $message, $current, \%attach, $args);
 }

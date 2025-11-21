@@ -41,6 +41,12 @@ HTML::FromMail - base-class for the HTML producers
 This module is designed to put e-mail related data
 on web-pages.  This could be used to create web-mail clients.
 
+B<Be aware:>
+This module version 4.0 and up is not fully compatible with older releases:
+mainly the exception handling has changed.  When you need to upgrade, please read
+F<https://https://github.com/markov2/perl5-Mail-Box/wiki/>
+B<Version 3 is still maintained> and may see new releases as well.
+
 =section Status
 =over 4
 =item *
@@ -134,8 +140,7 @@ base for relative names.
 
 sub init($)
 {	my ($self, $args) = @_;
-
-	$self->SUPER::init($args) or return;
+	$self->SUPER::init($args);
 
 	# Defining the formatter to be used
 	my $form = $args->{formatter} || {};
@@ -214,9 +219,7 @@ sub producer($;$)
 	return ($self->{HF_producer}{$class} = shift) if @_;
 	if(my $prod = $self->{HF_producer}{$class})
 	{	eval "require $prod";
-		$@ and error __x"cannot use {producer} for {class}:\n$@",
-			producer => $prod, class => $class, error => $@;
-
+		$@ and error __x"cannot use {producer} for {class}:\n$@", producer => $prod, class => $class, error => $@;
 		return $prod->new;
 	}
 

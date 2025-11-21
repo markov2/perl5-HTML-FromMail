@@ -60,7 +60,6 @@ sub expand($$$$)
 	# Lookup the method to be called.
 	my $method = 'html' . ucfirst($tag);
 	my $prod   = $args->{producer};
-
 	$prod->can($method) or return undef;
 
 	my %info  = (%$args, %$attrs, textref => $textref);

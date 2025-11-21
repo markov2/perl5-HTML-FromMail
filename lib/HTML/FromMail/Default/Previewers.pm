@@ -148,7 +148,7 @@ sub previewHtml($$$$$)
 	}
 	substr($decoded, $max) = '' if length $decoded > $max;
 
-	+{	%$attach,
+	 +{	%$attach,
 		image => '',            # this is not an image
 		html  => { text => $decoded },
 	  };
@@ -189,7 +189,8 @@ sub previewImage($$$$$)
 	my $filename = $attach->{filename};
 	my $magick   = Image::Magick->new;
 	my $error    = $magick->Read($filename);
-	length $error and error __x"cannot read image from {fn}: {error}", fn => $filename, error => $error;
+	length $error
+		and error __x"cannot read image from {fn}: {error}", fn => $filename, error => $error;
 
 	my %image;
 	my ($srcw, $srch) = @image{ qw/width height/ } = $magick->Get( qw/width height/ );
@@ -205,7 +206,8 @@ sub previewImage($$$$$)
 	if($reqw < $srcw || $reqh < $srch)
 	{	# Size reduction is needed.
 		$error   = $magick->Resize(width => $reqw, height => $reqh);
-		length $error and error __x"cannot resize image from {fn}: {error}", fn => $filename, error => $error;
+		length $error
+			and error __x"cannot resize image from {fn}: {error}", fn => $filename, error => $error;
 
 		my ($resw, $resh) = @image{ qw/smallwidth smallheight/ } = $magick->Get( qw/width height/ );
 
@@ -213,8 +215,8 @@ sub previewImage($$$$$)
 		@image{ qw/smallfile smallurl/ } = ($outfile, basename($outfile));
 
 		$error      = $magick->Write($outfile);
-		length $error and error __x"cannot write smaller image from {fn} to {out}: {error}",
-			in => $filename, out => $outfile, error => $error;
+		length $error
+			and error __x"cannot write smaller image from {fn} to {out}: {error}", in => $filename, out => $outfile, error => $error;
 	}
 	else
 	{	@image{ qw/smallfile smallurl smallwidth smallheight/ } = ($filename, $attach->{url}, $srcw, $srch);
