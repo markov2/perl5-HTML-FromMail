@@ -44,7 +44,7 @@ on web-pages.  This could be used to create web-mail clients.
 B<Be aware:>
 This module version 4.0 and up is not fully compatible with older releases:
 mainly the exception handling has changed.  When you need to upgrade, please read
-F<https://https://github.com/markov2/perl5-Mail-Box/wiki/>
+F<https://github.com/markov2/perl5-Mail-Box/wiki/>
 B<Version 3 is still maintained> and may see new releases as well.
 
 =section Status
