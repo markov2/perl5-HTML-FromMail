@@ -10,6 +10,9 @@ Mark Overmeer.
 
 version 3.02:
 
+	Fixes:
+	- optional modules -> recommends.
+
 version 3.01: Fri 21 Nov 13:49:38 CET 2025
 
 	Changes:
